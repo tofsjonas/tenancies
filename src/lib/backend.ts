@@ -29,7 +29,7 @@ export const getAddressInfoFromDAWA = ({ query, success, fail }: AddressParams):
 //     })
 // }
 
-export const getTenanciesFromBackend = async () => {
+export const getTenanciesFromStorage = async () => {
   return new Promise<Tenancy[]>((resolve, reject) => {
     const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
     try {
@@ -46,7 +46,7 @@ export const getTenanciesFromBackend = async () => {
  * @todo ensure unique addresses
  */
 
-export const addTenancyToBackend = async (obj: Tenancy) => {
+export const addTenancyToStorage = async (obj: Tenancy) => {
   return new Promise<Tenancy>((resolve, reject) => {
     const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
     try {
@@ -60,7 +60,7 @@ export const addTenancyToBackend = async (obj: Tenancy) => {
   })
 }
 
-export const deleteTenancyFromBackend = async (id: string) => {
+export const deleteTenancyFromStorage = async (id: string) => {
   return new Promise<void>((resolve, reject) => {
     const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
     try {

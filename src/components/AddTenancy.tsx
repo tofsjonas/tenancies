@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
-import { addTenancyToBackend, getAddressInfoFromDAWA } from '../lib/backend'
+import { addTenancyToStorage, getAddressInfoFromDAWA } from '../lib/backend'
 import { Tenancy } from '../types/global'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'
 
@@ -42,7 +42,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
     event.stopPropagation()
     if (picked_tenancy) {
       setIsSaving(true)
-      addTenancyToBackend(picked_tenancy)
+      addTenancyToStorage(picked_tenancy)
         .then((data) => {
           setIsSaving(false)
           hideModal()

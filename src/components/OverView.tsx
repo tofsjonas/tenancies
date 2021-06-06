@@ -9,7 +9,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { PlusLg, XLg } from 'react-bootstrap-icons'
 
 import { Tenancy } from '../types/global'
-import { deleteTenancyFromBackend, getTenanciesFromBackend } from '../lib/backend'
+import { deleteTenancyFromStorage, getTenanciesFromStorage } from '../lib/backend'
 
 const AddTenancy = lazy(() => import('./AddTenancy'))
 
@@ -31,7 +31,7 @@ const OverView = () => {
     // setTenancies([])
     setLoading(false)
 
-    getTenanciesFromBackend()
+    getTenanciesFromStorage()
       .then((data) => {
         setTenancies(data)
         // console.log(res)
@@ -48,7 +48,7 @@ const OverView = () => {
    */
   const handleDeleteClick = (id: string) => {
     if (window.confirm('Are you sure?')) {
-      deleteTenancyFromBackend(id)
+      deleteTenancyFromStorage(id)
         .then(() => {
           console.log('success')
         })
