@@ -28,19 +28,20 @@ const OverView = () => {
   const [show_add_modal, setShowAddModal] = useState(false)
 
   useEffect(() => {
-    // setTenancies([])
     setLoading(false)
+    let is_mounted = true
 
     getTenanciesFromStorage()
       .then((data) => {
-        setTenancies(data)
-        // console.log(res)
+        if (is_mounted) setTenancies(data)
       })
       .catch((err) => {
         console.log(err)
       })
 
-    // setTenancies()
+    return () => {
+      is_mounted = false
+    }
   }, [])
 
   /**
