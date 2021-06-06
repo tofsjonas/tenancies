@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react'
+import React, { useState, useEffect, lazy, Suspense, useRef, useContext } from 'react'
 import styled from '@emotion/styled'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -7,9 +7,8 @@ import Button from 'react-bootstrap/Button'
 import Navbar from 'react-bootstrap/Navbar'
 import Spinner from 'react-bootstrap/Spinner'
 import { PlusLg, XLg } from 'react-bootstrap-icons'
-
-import { Tenancy } from '../types/global'
 import { deleteTenancyFromStorage, getTenanciesFromStorage } from '../lib/backend'
+import { TenancyContext, SET_TENANCIES, DELETE_TENANCY } from '../contexts/TenancyContext'
 
 const AddTenancy = lazy(() => import('./AddTenancy'))
 
@@ -23,24 +22,31 @@ const FabButton = styled(Button)`
 `
 
 const OverView = () => {
-  const [tenancies, setTenancies] = useState<Tenancy[]>()
+  const { tenancies, dispatch } = useContext(TenancyContext)
+
   const [loading, setLoading] = useState(true)
   const [show_add_modal, setShowAddModal] = useState(false)
+  const is_mounted = useRef(false)
 
   useEffect(() => {
-    setLoading(false)
-    let is_mounted = true
-
+    is_mounted.current = true
     getTenanciesFromStorage()
       .then((data) => {
-        if (is_mounted) setTenancies(data)
+        if (is_mounted.current) {
+          dispatch({
+            type: SET_TENANCIES,
+            payload: data,
+          })
+          setLoading(false)
+        }
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err)
       })
 
     return () => {
-      is_mounted = false
+      is_mounted.current = false
     }
   }, [])
 
@@ -51,7 +57,10 @@ const OverView = () => {
     if (window.confirm('Are you sure?')) {
       deleteTenancyFromStorage(id)
         .then(() => {
-          console.log('success')
+          dispatch({
+            type: DELETE_TENANCY,
+            payload: id,
+          })
         })
         .catch((err) => {
           console.log(err)

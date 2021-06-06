@@ -34,7 +34,10 @@ export const getTenanciesFromStorage = async () => {
     const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
     try {
       const parsed_json = JSON.parse(tenancies_as_json_string)
-      resolve(parsed_json)
+      // to fake load time
+      setTimeout(() => {
+        resolve(parsed_json)
+      }, 200)
     } catch (error) {
       localStorage.setItem('tenancies', '')
       reject(new Error('Data corrupt, resetting!'))
@@ -53,7 +56,10 @@ export const addTenancyToStorage = async (obj: Tenancy) => {
       const tenancies = JSON.parse(tenancies_as_json_string)
       tenancies.push(obj)
       localStorage.setItem('tenancies', JSON.stringify(tenancies))
-      resolve(obj)
+      // to fake load time
+      setTimeout(() => {
+        resolve(obj)
+      }, 600)
     } catch (error) {
       reject(error)
     }
@@ -67,7 +73,10 @@ export const deleteTenancyFromStorage = async (id: string) => {
       const tenancies = JSON.parse(tenancies_as_json_string)
       const new_tenancies = tenancies.filter((obj: Tenancy) => obj.adgangsadresse.id !== id)
       localStorage.setItem('tenancies', JSON.stringify(new_tenancies))
-      resolve()
+      // to fake load time
+      setTimeout(() => {
+        resolve()
+      }, 200)
     } catch (error) {
       reject(error)
     }

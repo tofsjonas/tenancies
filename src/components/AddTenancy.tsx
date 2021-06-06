@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
@@ -6,12 +6,15 @@ import Form from 'react-bootstrap/Form'
 import { addTenancyToStorage, getAddressInfoFromDAWA } from '../lib/backend'
 import { Tenancy } from '../types/global'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'
+import { ADD_TENANCY, TenancyContext } from '../contexts/TenancyContext'
 
 type AddTenancyProps = {
   hideModal: () => void
 }
 
 const AddTenancy = ({ hideModal }: AddTenancyProps) => {
+  const { dispatch } = useContext(TenancyContext)
+
   const [is_loading, setIsLoading] = useState(false)
   const [is_saving, setIsSaving] = useState(false)
 
@@ -44,6 +47,11 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
       setIsSaving(true)
       addTenancyToStorage(picked_tenancy)
         .then((data) => {
+          dispatch({
+            type: ADD_TENANCY,
+            payload: data,
+          })
+
           setIsSaving(false)
           hideModal()
           console.log(data)
