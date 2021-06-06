@@ -9,6 +9,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { PlusLg, XLg } from 'react-bootstrap-icons'
 
 import { Tenancy } from '../types/global'
+import { deleteTenancyFromBackend, getTenanciesFromBackend } from '../lib/backend'
 
 const AddTenancy = lazy(() => import('./AddTenancy'))
 
@@ -24,59 +25,37 @@ const FabButton = styled(Button)`
 const OverView = () => {
   const [tenancies, setTenancies] = useState<Tenancy[]>()
   const [loading, setLoading] = useState(true)
-  const [show_add_modal, setShowAddModal] = useState(true)
+  const [show_add_modal, setShowAddModal] = useState(false)
 
   useEffect(() => {
     // setTenancies([])
     setLoading(false)
-    setTenancies([
-      {
-        tekst: 'Randlevvej 8, 8300 Odder',
-        adgangsadresse: {
-          id: '0a3f5094-7659-32b8-e044-0003ba298018',
-          status: 1,
-          darstatus: 3,
-          vejkode: '5911',
-          vejnavn: 'Randlevvej',
-          adresseringsvejnavn: 'Randlevvej',
-          husnr: '8',
-          supplerendebynavn: null,
-          postnr: '8300',
-          postnrnavn: 'Odder',
-          stormodtagerpostnr: null,
-          stormodtagerpostnrnavn: null,
-          kommunekode: '0727',
-          x: 10.15737503,
-          y: 55.97067305,
-          href: 'https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7659-32b8-e044-0003ba298018',
-        },
-      },
-      {
-        tekst: 'Rentemestervej 7A, 2400 København NV',
-        adgangsadresse: {
-          id: '0a3f507a-e175-32b8-e044-0003ba298018',
-          status: 1,
-          darstatus: 3,
-          vejkode: '5804',
-          vejnavn: 'Rentemestervej',
-          adresseringsvejnavn: 'Rentemestervej',
-          husnr: '7A',
-          supplerendebynavn: null,
-          postnr: '2400',
-          postnrnavn: 'København NV',
-          stormodtagerpostnr: null,
-          stormodtagerpostnrnavn: null,
-          kommunekode: '0101',
-          x: 12.53598846,
-          y: 55.70437954,
-          href: 'https://api.dataforsyningen.dk/adgangsadresser/0a3f507a-e175-32b8-e044-0003ba298018',
-        },
-      },
-    ])
+
+    getTenanciesFromBackend()
+      .then((data) => {
+        setTenancies(data)
+        // console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+    // setTenancies()
   }, [])
 
-  const handleDeleteClick = () => {
-    console.log('delete')
+  /**
+   * @todo make it purdier than window.confirm
+   */
+  const handleDeleteClick = (id: string) => {
+    if (window.confirm('Are you sure?')) {
+      deleteTenancyFromBackend(id)
+        .then(() => {
+          console.log('success')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 
   const handleCloseAddModal = () => {
@@ -101,12 +80,17 @@ const OverView = () => {
 
         {!loading &&
           tenancies &&
-          tenancies.length &&
+          tenancies.length > 0 &&
           tenancies.map((tenancy) => (
             <Row className="mt-1 align-items-center" key={tenancy.tekst}>
               <Col>{tenancy.tekst}</Col>
               <Col md="auto">
-                <Button variant="danger" onClick={handleDeleteClick}>
+                <Button
+                  variant="danger"
+                  onClick={() => {
+                    handleDeleteClick(tenancy.adgangsadresse.id)
+                  }}
+                >
                   <XLg />
                 </Button>
               </Col>
