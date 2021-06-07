@@ -54,7 +54,6 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
 
           setIsSaving(false)
           hideModal()
-          console.log(data)
         })
         .catch((err) => {
           setIsSaving(false)

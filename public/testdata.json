@@ -1,0 +1,422 @@
+[
+  {
+    "tekst": "Randlevvej 8, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7659-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "8",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15737503,
+      "y": 55.97067305,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7659-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randerup 1, 6261 Bredebro",
+    "adgangsadresse": {
+      "id": "0a3f508b-4213-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "1297",
+      "vejnavn": "Randerup",
+      "adresseringsvejnavn": "Randerup",
+      "husnr": "1",
+      "supplerendebynavn": null,
+      "postnr": "6261",
+      "postnrnavn": "Bredebro",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0550",
+      "x": 8.7308629,
+      "y": 55.07212147,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f508b-4213-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 5A, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7650-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "5A",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15372565,
+      "y": 55.97278942,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7650-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 5C, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7652-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "5C",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.1537799,
+      "y": 55.9727332,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7652-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 7B, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7656-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "7B",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.1542294,
+      "y": 55.97257821,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7656-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 7C, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7657-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "7C",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15437804,
+      "y": 55.97270505,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7657-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 12, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-765f-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "12",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15787401,
+      "y": 55.97057725,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-765f-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 17, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7664-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "17",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15484811,
+      "y": 55.9719498,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7664-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 18, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7665-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "18",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.1586908,
+      "y": 55.97028042,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7665-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 19, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7666-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "19",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15499382,
+      "y": 55.97187646,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7666-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 20, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7667-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "20",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15889479,
+      "y": 55.97019529,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7667-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 22, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7669-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "22",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15915,
+      "y": 55.97013502,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7669-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 23, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-766a-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "23",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15527178,
+      "y": 55.97174042,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-766a-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 25, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-766d-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "25",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.1553968,
+      "y": 55.97168803,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-766d-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 26, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-766e-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "26",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.16008295,
+      "y": 55.96991356,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-766e-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 31, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7671-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "31",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15601434,
+      "y": 55.97145131,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7671-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 33, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7672-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "33",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15622076,
+      "y": 55.97137749,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7672-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 35, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7673-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "35",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15668979,
+      "y": 55.97124962,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7673-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 39, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7675-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "39",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15721921,
+      "y": 55.97105694,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7675-32b8-e044-0003ba298018"
+    }
+  },
+  {
+    "tekst": "Randlevvej 45, 8300 Odder",
+    "adgangsadresse": {
+      "id": "0a3f5094-7678-32b8-e044-0003ba298018",
+      "status": 1,
+      "darstatus": 3,
+      "vejkode": "5911",
+      "vejnavn": "Randlevvej",
+      "adresseringsvejnavn": "Randlevvej",
+      "husnr": "45",
+      "supplerendebynavn": null,
+      "postnr": "8300",
+      "postnrnavn": "Odder",
+      "stormodtagerpostnr": null,
+      "stormodtagerpostnrnavn": null,
+      "kommunekode": "0727",
+      "x": 10.15797321,
+      "y": 55.9708352,
+      "href": "https://api.dataforsyningen.dk/adgangsadresser/0a3f5094-7678-32b8-e044-0003ba298018"
+    }
+  }
+]
