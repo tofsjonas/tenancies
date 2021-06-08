@@ -80,7 +80,7 @@ const OverView = () => {
         <Navbar.Brand>My Tenancies</Navbar.Brand>
         <Form inline>
           <FormControl
-            type="text"
+            type="search"
             placeholder="Search"
             value={filter}
             onChange={handleFilterChange}

@@ -105,6 +105,14 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
           )}
         </>
       )}
+      {items && items.length === 0 && (
+        <Row className="mt-1 align-items-center">
+          <Col>
+            <br />
+            Search result empty :(
+          </Col>
+        </Row>
+      )}
     </div>
   )
 }
