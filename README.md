@@ -1,6 +1,6 @@
 # README
 
-This is a simple web application, built as a work test.
+This is a simple web application, built as a work test. Feel free to check out the [demo](https://tofsjonas.github.io/tenancies/)!
 
 ## Solution
 
