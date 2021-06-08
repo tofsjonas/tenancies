@@ -1,11 +1,15 @@
 import React, { useState, useEffect, lazy, Suspense, useRef, useContext } from 'react'
+import { Tenancy } from '../types/global'
 import styled from '@emotion/styled'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Navbar from 'react-bootstrap/Navbar'
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
 import Spinner from 'react-bootstrap/Spinner'
+
 import { PlusLg } from 'react-bootstrap-icons'
 import { getTenanciesFromStorage } from '../lib/backend'
 import { TenancyContext, SET_TENANCIES } from '../contexts/TenancyContext'
@@ -25,6 +29,9 @@ const FabButton = styled(Button)`
 const OverView = () => {
   const { tenancies, dispatch } = useContext(TenancyContext)
   const [loading, setLoading] = useState(true)
+  const [filter, setFilter] = useState('')
+  const [filtered_list, setFilteredList] = useState<Tenancy[]>([])
+
   const [show_add_modal, setShowAddModal] = useState(false)
   const is_mounted = useRef(false)
 
@@ -50,6 +57,11 @@ const OverView = () => {
     }
   }, [dispatch])
 
+  useEffect(() => {
+    const list = tenancies.filter((obj) => new RegExp(filter, 'i').test(obj.tekst))
+    setFilteredList(list)
+  }, [tenancies, filter])
+
   const handleCloseAddModal = () => {
     setShowAddModal(false)
   }
@@ -58,12 +70,25 @@ const OverView = () => {
     setShowAddModal(true)
   }
 
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value)
+  }
+
   return (
     <>
       <Navbar bg="light" expand="lg">
         <Navbar.Brand>My Tenancies</Navbar.Brand>
+        <Form inline>
+          <FormControl
+            type="text"
+            placeholder="Search"
+            value={filter}
+            onChange={handleFilterChange}
+            className="mr-sm-2"
+          />
+        </Form>
       </Navbar>
-      <Container fluid="md">
+      <Container>
         {loading && (
           <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
@@ -74,7 +99,7 @@ const OverView = () => {
             <Col>You have no tenancies, go ahead and add one!</Col>
           </Row>
         )}
-        {!loading && tenancies && tenancies.length > 0 && <TenancyList />}
+        {!loading && tenancies && tenancies.length > 0 && <TenancyList tenancies={filtered_list} />}
       </Container>
       <FabButton onClick={handleAddClick}>
         <PlusLg />
