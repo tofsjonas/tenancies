@@ -8,9 +8,13 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { XLg } from 'react-bootstrap-icons'
 
-const TenancyList = () => {
+type TenancyListProps = {
+  tenancies: Tenancy[]
+}
+
+const TenancyList = ({ tenancies }: TenancyListProps) => {
   const items_per_page = parseInt(process.env.REACT_APP_NUMBER_OF_ITEMS_IN_TENANCY_LIST || '10')
-  const { tenancies, dispatch } = useContext(TenancyContext)
+  const { dispatch } = useContext(TenancyContext)
   const [items, setItems] = useState<Tenancy[]>()
   const [page_count, setPageCount] = useState(1)
   const [current_page_index, setCurrentPageIndex] = useState(1)
@@ -100,6 +104,14 @@ const TenancyList = () => {
             </>
           )}
         </>
+      )}
+      {items && items.length === 0 && (
+        <Row className="mt-1 align-items-center">
+          <Col>
+            <br />
+            Search result empty :(
+          </Col>
+        </Row>
       )}
     </div>
   )
