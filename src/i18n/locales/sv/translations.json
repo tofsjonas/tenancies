@@ -8,5 +8,17 @@
   "add_tenancy_save_button_is_saving": "sparar...",
   "add_tenancy_start_typing_to_fetch": "Börja skriva för att hämta adress:",
   "add_tenancy_fetch_placeholder": "Adress...",
-  "add_tenancy_modal_title": "Lägg till fastighet"
+  "add_tenancy_modal_title": "Lägg till fastighet",
+
+  "edit_tenancy_cancel_button": "Avbryt",
+  "edit_tenancy_save_button": "Spara ändringar",
+  "edit_tenancy_save_button_is_saving": "sparar...",
+  "edit_tenancy_label_size": "Area (m2):",
+  "edit_tenancy_label_size_placeholder": "Area...",
+  "edit_tenancy_label_nbr_of_rooms": "Antal rum:",
+  "edit_tenancy_label_nbr_of_rooms_placeholder": "Antal rum...",
+  "edit_tenancy_label_utilities": "Verktyg?",
+  "edit_tenancy_label_utilities_placeholder": "Lista verktyg...",
+  "edit_tenancy_label_tenant_information": "Information om hyresgäst:",
+  "edit_tenancy_label_tenant_information_placeholder": "Information..."
 }
