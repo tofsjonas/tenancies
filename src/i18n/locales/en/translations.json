@@ -1,6 +1,6 @@
 {
   "overview_navbar_brand": "My Tenancies",
-  "overview_navbar_placeholder_search": "Search",
+  "overview_navbar_placeholder_search": "Search...",
   "overview_you_have_no_tenancies": "You have no tenancies, go ahead and add one!",
 
   "add_tenancy_cancel_button": "Cancel",
@@ -8,5 +8,17 @@
   "add_tenancy_save_button_is_saving": "saving...",
   "add_tenancy_start_typing_to_fetch": "Start typing to fetch address info:",
   "add_tenancy_fetch_placeholder": "Enter address...",
-  "add_tenancy_modal_title": "Add new Tenancy"
+  "add_tenancy_modal_title": "Add new Tenancy",
+
+  "edit_tenancy_cancel_button": "Cancel",
+  "edit_tenancy_save_button": "Save changes",
+  "edit_tenancy_save_button_is_saving": "saving...",
+  "edit_tenancy_label_size": "Size (m2):",
+  "edit_tenancy_label_size_placeholder": "Enter size...",
+  "edit_tenancy_label_nbr_of_rooms": "Number of rooms:",
+  "edit_tenancy_label_nbr_of_rooms_placeholder": "Enter a number...",
+  "edit_tenancy_label_utilities": "Utilities:",
+  "edit_tenancy_label_utilities_placeholder": "List utilities...",
+  "edit_tenancy_label_tenant_information": "Information about tenant:",
+  "edit_tenancy_label_tenant_information_placeholder": "Enter information..."
 }

@@ -45,8 +45,33 @@ export const addTenancyToStorage = async (obj: Tenancy) => {
   return new Promise<Tenancy>((resolve, reject) => {
     const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
     try {
+      obj.created_date = new Date().toISOString()
       const tenancies = JSON.parse(tenancies_as_json_string)
       tenancies.push(obj)
+      localStorage.setItem('tenancies', JSON.stringify(tenancies))
+      // to fake load time
+      setTimeout(() => {
+        resolve(obj)
+      }, 600)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+export const updateTenancyInStorage = async (obj: Tenancy) => {
+  return new Promise<Tenancy>((resolve, reject) => {
+    const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
+    try {
+      obj.updated_date = new Date().toISOString()
+      const tenancies = (JSON.parse(tenancies_as_json_string) as Tenancy[]).map((tenancy) => {
+        if (tenancy.adgangsadresse.id === obj.adgangsadresse.id) {
+          return obj
+        } else {
+          return tenancy
+        }
+      })
+
       localStorage.setItem('tenancies', JSON.stringify(tenancies))
       // to fake load time
       setTimeout(() => {
