@@ -81,12 +81,12 @@ const OverView = () => {
   return (
     <>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand>{t('overview_navbar_brand')}</Navbar.Brand>
+        <Navbar.Brand className="mr-auto">{t('overview_navbar_brand')}</Navbar.Brand>
         <LanguageToggler />
         <Form inline>
           <FormControl
             type="search"
-            placeholder="Search"
+            placeholder={t('overview_navbar_placeholder_search')}
             value={filter}
             onChange={handleFilterChange}
             className="mr-sm-2"
@@ -101,7 +101,7 @@ const OverView = () => {
         )}
         {!loading && tenancies && tenancies.length === 0 && (
           <Row>
-            <Col>You have no tenancies, go ahead and add one!</Col>
+            <Col>{t('overview_you_have_no_tenancies')}</Col>
           </Row>
         )}
         {!loading && tenancies && tenancies.length > 0 && <TenancyList tenancies={filtered_list} />}

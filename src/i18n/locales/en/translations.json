@@ -1,5 +1,12 @@
 {
-  "my_tenancies": "My Tenancies",
   "overview_navbar_brand": "My Tenancies",
-  "page2": "Page 2"
+  "overview_navbar_placeholder_search": "Search",
+  "overview_you_have_no_tenancies": "You have no tenancies, go ahead and add one!",
+
+  "add_tenancy_cancel_button": "Cancel",
+  "add_tenancy_save_button": "Save changes",
+  "add_tenancy_save_button_is_saving": "saving...",
+  "add_tenancy_start_typing_to_fetch": "Start typing to fetch address info:",
+  "add_tenancy_fetch_placeholder": "Enter address...",
+  "add_tenancy_modal_title": "Add new Tenancy"
 }
