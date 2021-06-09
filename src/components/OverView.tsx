@@ -9,11 +9,13 @@ import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Spinner from 'react-bootstrap/Spinner'
+import { useTranslation } from 'react-i18next'
 
 import { PlusLg } from 'react-bootstrap-icons'
 import { getTenanciesFromStorage } from '../lib/backend'
 import { TenancyContext, SET_TENANCIES } from '../contexts/TenancyContext'
 import TenancyList from './TenancyList'
+import LanguageToggler from './LanguageToggler'
 
 const AddTenancy = lazy(() => import('./AddTenancy'))
 
@@ -27,6 +29,8 @@ const FabButton = styled(Button)`
 `
 
 const OverView = () => {
+  const { t } = useTranslation()
+
   const { tenancies, dispatch } = useContext(TenancyContext)
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('')
@@ -77,11 +81,12 @@ const OverView = () => {
   return (
     <>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand>My Tenancies</Navbar.Brand>
+        <Navbar.Brand className="mr-auto">{t('overview_navbar_brand')}</Navbar.Brand>
+        <LanguageToggler />
         <Form inline>
           <FormControl
             type="search"
-            placeholder="Search"
+            placeholder={t('overview_navbar_placeholder_search')}
             value={filter}
             onChange={handleFilterChange}
             className="mr-sm-2"
@@ -96,7 +101,7 @@ const OverView = () => {
         )}
         {!loading && tenancies && tenancies.length === 0 && (
           <Row>
-            <Col>You have no tenancies, go ahead and add one!</Col>
+            <Col>{t('overview_you_have_no_tenancies')}</Col>
           </Row>
         )}
         {!loading && tenancies && tenancies.length > 0 && <TenancyList tenancies={filtered_list} />}

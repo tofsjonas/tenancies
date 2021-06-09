@@ -1,0 +1,12 @@
+{
+  "overview_navbar_brand": "Mina fastigheter",
+  "overview_you_have_no_tenancies": "Du har inga fastigheter, varsågod och lägg till en!",
+  "overview_navbar_placeholder_search": "Sök",
+
+  "add_tenancy_cancel_button": "Avbryt",
+  "add_tenancy_save_button": "Spara adress",
+  "add_tenancy_save_button_is_saving": "sparar...",
+  "add_tenancy_start_typing_to_fetch": "Börja skriva för att hämta adress:",
+  "add_tenancy_fetch_placeholder": "Adress...",
+  "add_tenancy_modal_title": "Lägg till fastighet"
+}

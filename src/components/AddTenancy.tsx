@@ -8,11 +8,15 @@ import { Tenancy } from '../types/global'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'
 import { ADD_TENANCY, TenancyContext } from '../contexts/TenancyContext'
 
+import { useTranslation } from 'react-i18next'
+
 type AddTenancyProps = {
   hideModal: () => void
 }
 
 const AddTenancy = ({ hideModal }: AddTenancyProps) => {
+  const { t } = useTranslation()
+
   const { dispatch } = useContext(TenancyContext)
 
   const [is_loading, setIsLoading] = useState(false)
@@ -68,10 +72,10 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
     <Modal show={true} onHide={hideModal}>
       <Form onSubmit={handleSubmit}>
         <Modal.Header>
-          <Modal.Title>Add new Tenancy</Modal.Title>
+          <Modal.Title>{t('add_tenancy_modal_title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Start typing to fetch address info:
+          {t('add_tenancy_start_typing_to_fetch')}
           <AsyncTypeahead
             filterBy={filterBy}
             id="async-tenancies"
@@ -81,13 +85,13 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
             onSearch={handleSearch}
             onChange={handleTenancyPick}
             options={options}
-            placeholder="Search for an address..."
+            placeholder={t('add_tenancy_fetch_placeholder')}
             renderMenuItemChildren={(option: Tenancy) => <span>{option.tekst}</span>}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={hideModal}>
-            Close
+            {t('add_tenancy_cancel_button')}
           </Button>
           <Button
             variant={picked_tenancy ? 'primary' : 'secondary'}
@@ -99,10 +103,10 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
                 <Spinner animation="border" role="status" size="sm">
                   <span className="sr-only">Loading...</span>
                 </Spinner>{' '}
-                ...saving
+                {t('add_tenancy_save_button_is_saving')}
               </>
             )}
-            {!is_saving && 'Save Changes'}
+            {!is_saving && t('add_tenancy_save_button')}
           </Button>
         </Modal.Footer>
       </Form>
