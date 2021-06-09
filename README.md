@@ -12,6 +12,7 @@ I use DAWA's autocomplete API to fetch address data and store the user data in l
 - **react-bootstrap-typeahead** was perfect, doing exactly what I wanted it to. 😊
 - **@emotion/styled** because I am familiar with it and I like it.
 - **Axios** rather than fetch. Better browser support, as well as (imho) easier to use.
+- I chose **react-i18next** over react-intl, due to fewer dependencies, smaller size, and I just liked it more.
 
 ### Caveats
 
