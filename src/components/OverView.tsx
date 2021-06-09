@@ -9,11 +9,13 @@ import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Spinner from 'react-bootstrap/Spinner'
+import { useTranslation } from 'react-i18next'
 
 import { PlusLg } from 'react-bootstrap-icons'
 import { getTenanciesFromStorage } from '../lib/backend'
 import { TenancyContext, SET_TENANCIES } from '../contexts/TenancyContext'
 import TenancyList from './TenancyList'
+import LanguageToggler from './LanguageToggler'
 
 const AddTenancy = lazy(() => import('./AddTenancy'))
 
@@ -27,6 +29,8 @@ const FabButton = styled(Button)`
 `
 
 const OverView = () => {
+  const { t } = useTranslation()
+
   const { tenancies, dispatch } = useContext(TenancyContext)
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('')
@@ -77,7 +81,8 @@ const OverView = () => {
   return (
     <>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand>My Tenancies</Navbar.Brand>
+        <Navbar.Brand>{t('overview_navbar_brand')}</Navbar.Brand>
+        <LanguageToggler />
         <Form inline>
           <FormControl
             type="search"
