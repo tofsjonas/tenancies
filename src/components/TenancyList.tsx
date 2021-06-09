@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, Suspense, lazy } from 'react'
 import { Tenancy } from '../types/global'
 import { deleteTenancyFromStorage } from '../lib/backend'
 import { TenancyContext, DELETE_TENANCY } from '../contexts/TenancyContext'
@@ -6,7 +6,9 @@ import Pagination from 'react-bootstrap/Pagination'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import { XLg } from 'react-bootstrap-icons'
+import { FileEarmarkPlus, FileEarmarkTextFill, XLg } from 'react-bootstrap-icons'
+
+const EditTenancy = lazy(() => import('./EditTenancy'))
 
 type TenancyListProps = {
   tenancies: Tenancy[]
@@ -18,6 +20,7 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
   const [items, setItems] = useState<Tenancy[]>()
   const [page_count, setPageCount] = useState(1)
   const [current_page_index, setCurrentPageIndex] = useState(1)
+  const [edit_tenancy, setEditTenancy] = useState<Tenancy | null>(null)
 
   const handleClick = (index: number) => {
     setCurrentPageIndex(index)
@@ -60,6 +63,10 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
     }
   }
 
+  const handleCloseEditModal = () => {
+    setEditTenancy(null)
+  }
+
   const getItems = () => {
     const items = []
     for (let number = 1; number <= page_count; number++) {
@@ -79,13 +86,21 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
   }
 
   return (
-    <div className="TenancyList">
+    <>
       {items && items.length > 0 && (
         <>
           {items.map((tenancy) => (
             <Row className="mt-1 align-items-center" key={tenancy.tekst}>
               <Col>{tenancy.tekst}</Col>
               <Col md="auto">
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    setEditTenancy(tenancy)
+                  }}
+                >
+                  {tenancy.metadata ? <FileEarmarkTextFill /> : <FileEarmarkPlus />}
+                </Button>
                 <Button
                   variant="danger"
                   onClick={() => {
@@ -113,7 +128,11 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
           </Col>
         </Row>
       )}
-    </div>
+
+      <Suspense fallback="loading...">
+        {edit_tenancy && <EditTenancy tenancy={edit_tenancy} hideModal={handleCloseEditModal} />}
+      </Suspense>
+    </>
   )
 }
 export default TenancyList

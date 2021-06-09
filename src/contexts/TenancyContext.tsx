@@ -3,6 +3,7 @@ import { Tenancy } from '../types/global'
 
 export const SET_TENANCIES = 'SET_TENANCIES'
 export const ADD_TENANCY = 'ADD_TENANCY'
+export const UPDATE_TENANCY = 'UPDATE_TENANCY'
 export const DELETE_TENANCY = 'DELETE_TENANCY'
 
 type State = {
@@ -12,6 +13,7 @@ type State = {
 type Action =
   | { type: 'SET_TENANCIES'; payload: Tenancy[] }
   | { type: 'ADD_TENANCY'; payload: Tenancy }
+  | { type: 'UPDATE_TENANCY'; payload: Tenancy }
   | { type: 'DELETE_TENANCY'; payload: string }
 
 const initialState: State = {
@@ -24,6 +26,17 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, tenancies: action.payload }
     case ADD_TENANCY:
       return { ...state, tenancies: [...state.tenancies, action.payload] }
+    case UPDATE_TENANCY:
+      return {
+        ...state,
+        tenancies: state.tenancies.map((tenancy) => {
+          if (tenancy.adgangsadresse.id === action.payload.adgangsadresse.id) {
+            return action.payload
+          } else {
+            return tenancy
+          }
+        }),
+      }
     case DELETE_TENANCY:
       return { ...state, tenancies: state.tenancies.filter((obj) => obj.adgangsadresse.id !== action.payload) }
     default:

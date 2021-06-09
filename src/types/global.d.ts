@@ -1,3 +1,10 @@
+type TenancyMetaData = {
+  size?: number
+  nbr_of_rooms?: number
+  utilities?: string
+  tenant_information?: string
+}
+
 export type Tenancy = {
   tekst: string
   adgangsadresse: {
@@ -18,4 +25,7 @@ export type Tenancy = {
     y?: number | null
     href?: string | null
   }
+  created_date?: string
+  updated_date?: string
+  metadata?: TenancyMetaData
 }
