@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useRef, useEffect } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
@@ -16,8 +16,16 @@ type AddTenancyProps = {
 
 const AddTenancy = ({ hideModal }: AddTenancyProps) => {
   const { t } = useTranslation()
-
   const { dispatch } = useContext(TenancyContext)
+
+  const is_mounted = useRef(false)
+
+  useEffect(() => {
+    is_mounted.current = true
+    return () => {
+      is_mounted.current = false
+    }
+  }, [])
 
   const [is_loading, setIsLoading] = useState(false)
   const [is_saving, setIsSaving] = useState(false)
@@ -55,12 +63,15 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
             type: ADD_TENANCY,
             payload: data,
           })
-
-          setIsSaving(false)
-          hideModal()
+          if (is_mounted.current) {
+            setIsSaving(false)
+            hideModal()
+          }
         })
         .catch((err) => {
-          setIsSaving(false)
+          if (is_mounted.current) {
+            setIsSaving(false)
+          }
           console.log(err)
         })
     }
