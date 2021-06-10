@@ -6,7 +6,8 @@ import Pagination from 'react-bootstrap/Pagination'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import { FileEarmarkPlus, FileEarmarkTextFill, XLg } from 'react-bootstrap-icons'
+import { Image, FileEarmarkPlus, FileEarmarkTextFill, XLg } from 'react-bootstrap-icons'
+import StreetView from './StreetView'
 
 const EditTenancy = lazy(() => import('./EditTenancy'))
 
@@ -21,6 +22,7 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
   const [page_count, setPageCount] = useState(1)
   const [current_page_index, setCurrentPageIndex] = useState(1)
   const [edit_tenancy, setEditTenancy] = useState<Tenancy | null>(null)
+  const [street_view_tenancy, setStreetViewTenancy] = useState<Tenancy | null>(null)
 
   const handleClick = (index: number) => {
     setCurrentPageIndex(index)
@@ -66,6 +68,9 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
   const handleCloseEditModal = () => {
     setEditTenancy(null)
   }
+  const handleCloseStreetViewModal = () => {
+    setStreetViewTenancy(null)
+  }
 
   const getItems = () => {
     const items = []
@@ -93,6 +98,14 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
             <Row className="mt-1 align-items-center" key={tenancy.tekst}>
               <Col>{tenancy.tekst}</Col>
               <Col md="auto">
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    setStreetViewTenancy(tenancy)
+                  }}
+                >
+                  <Image />
+                </Button>
                 <Button
                   variant="primary"
                   onClick={() => {
@@ -131,6 +144,7 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
 
       <Suspense fallback="loading...">
         {edit_tenancy && <EditTenancy tenancy={edit_tenancy} hideModal={handleCloseEditModal} />}
+        {street_view_tenancy && <StreetView tenancy={street_view_tenancy} hideModal={handleCloseStreetViewModal} />}
       </Suspense>
     </>
   )

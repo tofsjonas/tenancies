@@ -14,6 +14,13 @@ I use DAWA's autocomplete API to fetch address data and store the user data in l
 - **Axios** rather than fetch. Better browser support, as well as (imho) easier to use.
 - I chose **react-i18next** over react-intl, due to fewer dependencies, smaller size, and I just liked it more.
 
+### Features
+
+- Pagination (rather than infinity scroll)
+- Internationalization (English and Swedish atm)
+- Google Street View
+- Search my tenancies
+
 ### Caveats
 
 #### 1. It looks like crap
