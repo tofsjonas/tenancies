@@ -71,7 +71,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
   return (
     <Modal show={true} onHide={hideModal}>
       <Form onSubmit={handleSubmit}>
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>{t('add_tenancy_modal_title')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>

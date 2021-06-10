@@ -72,7 +72,7 @@ const EditTenancy = ({ hideModal, tenancy }: EditTenancyProps) => {
   return (
     <Modal show={true} onHide={hideModal}>
       <Form onSubmit={handleSubmit}>
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>{tenancy.tekst}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
