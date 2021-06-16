@@ -17,7 +17,7 @@ const StreetView = ({ hideModal, tenancy }: StreetViewProps) => {
         <Modal.Title>{tenancy.tekst}</Modal.Title>
       </Modal.Header>
       <Modal.Body className="text-center">
-        <Image width="400" height="400" src={url} rounded />
+        <Image crossOrigin="anonymous" width="400" height="400" src={url} rounded />
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={hideModal}>
