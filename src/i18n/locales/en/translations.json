@@ -20,5 +20,7 @@
   "edit_tenancy_label_utilities": "Utilities:",
   "edit_tenancy_label_utilities_placeholder": "List utilities...",
   "edit_tenancy_label_tenant_information": "Information about tenant:",
-  "edit_tenancy_label_tenant_information_placeholder": "Enter information..."
+  "edit_tenancy_label_tenant_information_placeholder": "Enter information...",
+
+  "tenancy_item_breadcrumb_back_to_list": "My Tenancies"
 }

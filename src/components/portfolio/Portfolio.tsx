@@ -1,23 +1,27 @@
 import React, { useState, useEffect, lazy, Suspense, useRef, useContext } from 'react'
-import { Tenancy } from '../../types/global'
-import styled from '@emotion/styled'
-import Container from 'react-bootstrap/Container'
+// import { Tenancy } from '../../types/global'
+// import styled from '@emotion/styled'
+// import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import Navbar from 'react-bootstrap/Navbar'
 import Spinner from 'react-bootstrap/Spinner'
 import { useTranslation } from 'react-i18next'
 
-import { PlusLg } from 'react-bootstrap-icons'
+// import { PlusLg } from 'react-bootstrap-icons'
 import { getTenanciesFromStorage } from '../../lib/backend'
 import { TenancyContext, SET_TENANCIES } from '../../contexts/TenancyContext'
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import TenancyItem from './TenancyItem'
-import TenancyList from '../TenancyList'
+import { Routes, Route } from 'react-router-dom'
+
+// import TenancyItem from './TenancyItem'
+// import TenancyList from './TenancyList'
 import LanguageToggler from '../LanguageToggler'
 import Search from './Search'
+
+const TenancyItem = lazy(() => import('./TenancyItem'))
+const TenancyList = lazy(() => import('./TenancyList'))
 
 const Portfolio = () => {
   const { t } = useTranslation()
@@ -61,7 +65,7 @@ const Portfolio = () => {
         </Row>
       )}
       {!loading && tenancies && tenancies.length > 0 && (
-        <>
+        <Suspense fallback="">
           <Navbar bg="light" expand="lg">
             <Navbar.Brand className="mr-auto">{t('overview_navbar_brand')}</Navbar.Brand>
             <LanguageToggler />
@@ -72,7 +76,7 @@ const Portfolio = () => {
             <Route path="tenancy/:id" element={<TenancyItem />} />
             <Route path="*" element={<TenancyList tenancies={tenancies} />} />
           </Routes>
-        </>
+        </Suspense>
       )}
     </>
   )

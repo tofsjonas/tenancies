@@ -1,14 +1,29 @@
-import React, { useContext, useState, useEffect, Suspense, lazy } from 'react'
-import { Tenancy } from '../types/global'
+import React, { useState, useEffect } from 'react'
+import { Tenancy } from '../../types/global'
 // import { deleteTenancyFromStorage } from '../lib/backend'
 // import { TenancyContext, DELETE_TENANCY } from '../contexts/TenancyContext'
 import Pagination from 'react-bootstrap/Pagination'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+
 // import Button from 'react-bootstrap/Button'
 // import { Image, FileEarmarkPlus, FileEarmarkTextFill, XLg } from 'react-bootstrap-icons'
 // import StreetView from './StreetView'
 import { useNavigate } from 'react-router-dom'
+
+import styled from '@emotion/styled'
+import { CaretRightFill } from 'react-bootstrap-icons'
+
+const MyRow = styled(Row)`
+  line-height: 40px;
+
+  &:hover {
+    color: white;
+    background-color: rgba(26, 10, 168, 0.6);
+    cursor: pointer;
+  }
+`
 
 // const EditTenancy = lazy(() => import('./EditTenancy'))
 
@@ -91,11 +106,11 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
   }
 
   return (
-    <>
+    <Container>
       {items && items.length > 0 && (
         <>
           {items.map((tenancy) => (
-            <Row
+            <MyRow
               className="mt-1 align-items-center"
               key={tenancy.tekst}
               onClick={() => {
@@ -103,6 +118,9 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
               }}
             >
               <Col>{tenancy.tekst}</Col>
+              <Col md="auto">
+                <CaretRightFill />
+              </Col>
               {/* <Col md="auto">
                 <Button
                   variant="primary"
@@ -129,7 +147,7 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
                   <XLg />
                 </Button>
               </Col> */}
-            </Row>
+            </MyRow>
           ))}
           {page_count > 1 && (
             <>
@@ -152,7 +170,7 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
         {edit_tenancy && <EditTenancy tenancy={edit_tenancy} />}
         {street_view_tenancy && <StreetView tenancy={street_view_tenancy} hideModal={handleCloseStreetViewModal} />}
       </Suspense> */}
-    </>
+    </Container>
   )
 }
 export default TenancyList

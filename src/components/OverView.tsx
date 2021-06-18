@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { PlusLg } from 'react-bootstrap-icons'
 import { getTenanciesFromStorage } from '../lib/backend'
 import { TenancyContext, SET_TENANCIES } from '../contexts/TenancyContext'
-import TenancyList from './TenancyList'
+import TenancyList from './portfolio/TenancyList'
 import LanguageToggler from './LanguageToggler'
 
 const AddTenancy = lazy(() => import('./AddTenancy'))
