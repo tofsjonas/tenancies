@@ -1,22 +1,13 @@
 import React, { useState, useEffect, lazy, Suspense, useRef, useContext } from 'react'
-// import { Tenancy } from '../../types/global'
-// import styled from '@emotion/styled'
-// import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-// import Button from 'react-bootstrap/Button'
 import Navbar from 'react-bootstrap/Navbar'
 import Spinner from 'react-bootstrap/Spinner'
 import { useTranslation } from 'react-i18next'
-
-// import { PlusLg } from 'react-bootstrap-icons'
 import { getTenanciesFromStorage } from '../../lib/backend'
 import { TenancyContext, SET_TENANCIES } from '../../contexts/TenancyContext'
-
 import { Routes, Route } from 'react-router-dom'
-
-// import TenancyItem from './TenancyItem'
-// import TenancyList from './TenancyList'
 import LanguageToggler from '../LanguageToggler'
 import Search from './Search'
 
@@ -60,16 +51,18 @@ const Portfolio = () => {
         </Spinner>
       )}
       {!loading && tenancies && tenancies.length === 0 && (
-        <Row>
-          <Col>{t('overview_you_have_no_tenancies')}</Col>
-        </Row>
+        <Container>
+          <Row>
+            <Col>{t('overview_you_have_no_tenancies')}</Col>
+          </Row>
+        </Container>
       )}
       {!loading && tenancies && tenancies.length > 0 && (
         <Suspense fallback="">
           <Navbar bg="light" expand="lg">
             <Navbar.Brand className="mr-auto">{t('overview_navbar_brand')}</Navbar.Brand>
             <LanguageToggler />
-            <Search />
+            <Search tenancies={tenancies} />
           </Navbar>
 
           <Routes>

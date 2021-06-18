@@ -3,9 +3,9 @@ import React, { useState, useContext, useRef, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
-import { updateTenancyInStorage } from '../lib/backend'
-import { Tenancy } from '../types/global'
-import { UPDATE_TENANCY, TenancyContext } from '../contexts/TenancyContext'
+import { updateTenancyInStorage } from '../../lib/backend'
+import { Tenancy } from '../../types/global'
+import { UPDATE_TENANCY, TenancyContext } from '../../contexts/TenancyContext'
 
 import { useTranslation } from 'react-i18next'
 
@@ -123,7 +123,6 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
           placeholder={t('edit_tenancy_label_tenant_information_placeholder')}
         />
       </Form.Group>
-      {/* <Button variant="secondary">{t('edit_tenancy_cancel_button')}</Button> */}
       <Button variant="primary" type="submit">
         {is_saving && (
           <>

@@ -3,10 +3,10 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
-import { addTenancyToStorage, getAddressInfoFromDAWA } from '../lib/backend'
-import { Tenancy } from '../types/global'
+import { addTenancyToStorage, getAddressInfoFromDAWA } from '../../lib/backend'
+import { Tenancy } from '../../types/global'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'
-import { ADD_TENANCY, TenancyContext } from '../contexts/TenancyContext'
+import { ADD_TENANCY, TenancyContext } from '../../contexts/TenancyContext'
 
 import { useTranslation } from 'react-i18next'
 
@@ -52,7 +52,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
     setPickedTenancy(pick[0])
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     event.stopPropagation()
     if (picked_tenancy) {

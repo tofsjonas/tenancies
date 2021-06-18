@@ -1,27 +1,43 @@
 import React, { useState } from 'react'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
 import { useTranslation } from 'react-i18next'
+import { Typeahead } from 'react-bootstrap-typeahead'
+import { Tenancy } from '../../types/global'
+import { useNavigate } from 'react-router-dom'
+import 'react-bootstrap-typeahead/css/Typeahead.css'
 
-const Search = () => {
+/**
+ * @todo react-highlight-words ?
+ */
+
+type SearchProps = {
+  tenancies: Tenancy[]
+}
+
+const Search = ({ tenancies }: SearchProps) => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
-  const [query, setQuery] = useState('')
+  // eslint-disable-next-line
+  const [selected, setSelected] = useState<Tenancy[]>([]) // setSelected never used..
 
-  const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value)
+  const handleTenancyPick = (pick: Tenancy[]) => {
+    if (pick[0]) {
+      navigate(`/tenancy/${pick[0].adgangsadresse.id}`)
+    }
   }
 
   return (
-    <Form inline>
-      <FormControl
-        type="search"
-        placeholder={t('overview_navbar_placeholder_search')}
-        value={query}
-        onChange={handleQueryChange}
-        className="mr-sm-2"
-      />
-    </Form>
+    <Typeahead
+      align="right"
+      id="async-tenancy-search"
+      labelKey="tekst"
+      minLength={1}
+      selected={selected}
+      onChange={handleTenancyPick}
+      options={tenancies}
+      placeholder={t('overview_navbar_placeholder_search')}
+      renderMenuItemChildren={(option: Tenancy) => <span>{option.tekst}</span>}
+    />
   )
 }
 export default Search
