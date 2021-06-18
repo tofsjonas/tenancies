@@ -14,11 +14,10 @@ type tplotOptions = {
 }
 
 type EditTenancyProps = {
-  hideModal: () => void
   tenancy: Tenancy
 }
 
-const EditTenancy = ({ hideModal, tenancy }: EditTenancyProps) => {
+const EditTenancy = ({ tenancy }: EditTenancyProps) => {
   const { t } = useTranslation()
   const is_mounted = useRef(false)
 
@@ -68,7 +67,7 @@ const EditTenancy = ({ hideModal, tenancy }: EditTenancyProps) => {
         })
         if (is_mounted.current) {
           setIsSaving(false)
-          hideModal()
+          // hideModal()
         }
       })
       .catch((err) => {
@@ -80,74 +79,63 @@ const EditTenancy = ({ hideModal, tenancy }: EditTenancyProps) => {
   }
 
   return (
-    <Modal show={true} onHide={hideModal}>
-      <Form onSubmit={handleSubmit}>
-        <Modal.Header closeButton>
-          <Modal.Title>{tenancy.tekst}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group controlId="formBasicSize">
-            <Form.Label>{t('edit_tenancy_label_size')}</Form.Label>
-            <Form.Control
-              defaultValue={tenancy.metadata && tenancy.metadata.size}
-              name="size"
-              type="number"
-              step="0.1"
-              placeholder={t('edit_tenancy_label_size_placeholder')}
-            />
-          </Form.Group>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formBasicSize">
+        <Form.Label>{t('edit_tenancy_label_size')}</Form.Label>
+        <Form.Control
+          defaultValue={tenancy.metadata && tenancy.metadata.size}
+          name="size"
+          type="number"
+          step="0.1"
+          placeholder={t('edit_tenancy_label_size_placeholder')}
+        />
+      </Form.Group>
 
-          <Form.Group controlId="formBasicNbrOfRooms">
-            <Form.Label>{t('edit_tenancy_label_nbr_of_rooms')}</Form.Label>
-            <Form.Control
-              defaultValue={tenancy.metadata && tenancy.metadata.nbr_of_rooms}
-              name="nbr_of_rooms"
-              type="number"
-              step="1"
-              placeholder={t('edit_tenancy_label_nbr_of_rooms_placeholder')}
-            />
-          </Form.Group>
+      <Form.Group controlId="formBasicNbrOfRooms">
+        <Form.Label>{t('edit_tenancy_label_nbr_of_rooms')}</Form.Label>
+        <Form.Control
+          defaultValue={tenancy.metadata && tenancy.metadata.nbr_of_rooms}
+          name="nbr_of_rooms"
+          type="number"
+          step="1"
+          placeholder={t('edit_tenancy_label_nbr_of_rooms_placeholder')}
+        />
+      </Form.Group>
 
-          <Form.Group controlId="formBasicUtilities">
-            <Form.Label>{t('edit_tenancy_label_utilities')}</Form.Label>
-            <Form.Control
-              name="utilities"
-              defaultValue={tenancy.metadata && tenancy.metadata.utilities}
-              as="textarea"
-              rows={3}
-              placeholder={t('edit_tenancy_label_utilities_placeholder')}
-            />
-          </Form.Group>
+      <Form.Group controlId="formBasicUtilities">
+        <Form.Label>{t('edit_tenancy_label_utilities')}</Form.Label>
+        <Form.Control
+          name="utilities"
+          defaultValue={tenancy.metadata && tenancy.metadata.utilities}
+          as="textarea"
+          rows={3}
+          placeholder={t('edit_tenancy_label_utilities_placeholder')}
+        />
+      </Form.Group>
 
-          <Form.Group controlId="formBasicTenantInformation">
-            <Form.Label>{t('edit_tenancy_label_tenant_information')}</Form.Label>
-            <Form.Control
-              defaultValue={tenancy.metadata && tenancy.metadata.tenant_information}
-              name="tenant_information"
-              as="textarea"
-              rows={3}
-              placeholder={t('edit_tenancy_label_tenant_information_placeholder')}
-            />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={hideModal}>
-            {t('edit_tenancy_cancel_button')}
-          </Button>
-          <Button variant="primary" type="submit">
-            {is_saving && (
-              <>
-                <Spinner animation="border" role="status" size="sm">
-                  <span className="sr-only">Loading...</span>
-                </Spinner>{' '}
-                {t('edit_tenancy_save_button_is_saving')}
-              </>
-            )}
-            {!is_saving && t('edit_tenancy_save_button')}
-          </Button>
-        </Modal.Footer>
-      </Form>
-    </Modal>
+      <Form.Group controlId="formBasicTenantInformation">
+        <Form.Label>{t('edit_tenancy_label_tenant_information')}</Form.Label>
+        <Form.Control
+          defaultValue={tenancy.metadata && tenancy.metadata.tenant_information}
+          name="tenant_information"
+          as="textarea"
+          rows={3}
+          placeholder={t('edit_tenancy_label_tenant_information_placeholder')}
+        />
+      </Form.Group>
+      {/* <Button variant="secondary">{t('edit_tenancy_cancel_button')}</Button> */}
+      <Button variant="primary" type="submit">
+        {is_saving && (
+          <>
+            <Spinner animation="border" role="status" size="sm">
+              <span className="sr-only">Loading...</span>
+            </Spinner>{' '}
+            {t('edit_tenancy_save_button_is_saving')}
+          </>
+        )}
+        {!is_saving && t('edit_tenancy_save_button')}
+      </Button>
+    </Form>
   )
 }
 export default EditTenancy
