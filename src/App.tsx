@@ -2,15 +2,13 @@ import React from 'react'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-// import OverView from './components/OverView'
 import TenancyProvider from './contexts/TenancyContext'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-// import Tenancy from './components/portfolio/TenancyItem'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import Portfolio from './components/portfolio/Portfolio'
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <TenancyProvider>
         <Container>
           <Row>
@@ -23,7 +21,7 @@ function App() {
           </Row>
         </Container>
       </TenancyProvider>
-    </BrowserRouter>
+    </Router>
   )
 }
 

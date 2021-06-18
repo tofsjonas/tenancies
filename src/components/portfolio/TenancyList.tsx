@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Tenancy } from '../../types/global'
-// import { deleteTenancyFromStorage } from '../lib/backend'
-// import { TenancyContext, DELETE_TENANCY } from '../contexts/TenancyContext'
 import Pagination from 'react-bootstrap/Pagination'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 
-// import Button from 'react-bootstrap/Button'
-// import { Image, FileEarmarkPlus, FileEarmarkTextFill, XLg } from 'react-bootstrap-icons'
-// import StreetView from './StreetView'
 import { useNavigate } from 'react-router-dom'
 
 import styled from '@emotion/styled'
@@ -24,9 +19,6 @@ const MyRow = styled(Row)`
     cursor: pointer;
   }
 `
-
-// const EditTenancy = lazy(() => import('./EditTenancy'))
-
 type TenancyListProps = {
   tenancies: Tenancy[]
 }
@@ -35,12 +27,9 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
   const navigate = useNavigate()
 
   const items_per_page = parseInt(process.env.REACT_APP_NUMBER_OF_ITEMS_IN_TENANCY_LIST || '10')
-  // const { dispatch } = useContext(TenancyContext)
   const [items, setItems] = useState<Tenancy[]>()
   const [page_count, setPageCount] = useState(1)
   const [current_page_index, setCurrentPageIndex] = useState(1)
-  // const [edit_tenancy, setEditTenancy] = useState<Tenancy | null>(null)
-  // const [street_view_tenancy, setStreetViewTenancy] = useState<Tenancy | null>(null)
 
   const handleClick = (index: number) => {
     setCurrentPageIndex(index)
@@ -64,28 +53,6 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
       setPageCount(count)
     }
   }, [tenancies, items_per_page])
-
-  /**
-   * @todo make it purdier than window.confirm
-   */
-  // const handleDeleteClick = (id: string) => {
-  //   if (window.confirm('Are you sure?')) {
-  //     deleteTenancyFromStorage(id)
-  //       .then(() => {
-  //         dispatch({
-  //           type: DELETE_TENANCY,
-  //           payload: id,
-  //         })
-  //       })
-  //       .catch((err) => {
-  //         console.log(err)
-  //       })
-  //   }
-  // }
-
-  // const handleCloseStreetViewModal = () => {
-  //   setStreetViewTenancy(null)
-  // }
 
   const getPaginationItems = () => {
     const items = []
@@ -121,32 +88,6 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
               <Col md="auto">
                 <CaretRightFill />
               </Col>
-              {/* <Col md="auto">
-                <Button
-                  variant="primary"
-                  onClick={() => {
-                    setStreetViewTenancy(tenancy)
-                  }}
-                >
-                  <Image />
-                </Button>
-                <Button
-                  variant="primary"
-                  onClick={() => {
-                    setEditTenancy(tenancy)
-                  }}
-                >
-                  {tenancy.metadata ? <FileEarmarkTextFill /> : <FileEarmarkPlus />}
-                </Button>
-                <Button
-                  variant="danger"
-                  onClick={() => {
-                    handleDeleteClick(tenancy.adgangsadresse.id)
-                  }}
-                >
-                  <XLg />
-                </Button>
-              </Col> */}
             </MyRow>
           ))}
           {page_count > 1 && (
@@ -165,11 +106,6 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
           </Col>
         </Row>
       )}
-
-      {/* <Suspense fallback="loading...">
-        {edit_tenancy && <EditTenancy tenancy={edit_tenancy} />}
-        {street_view_tenancy && <StreetView tenancy={street_view_tenancy} hideModal={handleCloseStreetViewModal} />}
-      </Suspense> */}
     </Container>
   )
 }
