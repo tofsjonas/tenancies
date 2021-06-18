@@ -21,6 +21,12 @@ const MyCrumb = styled(Breadcrumb)`
     background-color: transparent;
   }
 `
+const ItemContainer = styled(Container)`
+  img {
+    max-width: 85vw;
+  }
+  margin-bottom: 40px;
+`
 type TheItemProps = {
   item: Tenancy
 }
@@ -51,7 +57,7 @@ const TheItem = ({ item }: TheItemProps) => {
   }
 
   return (
-    <Container>
+    <ItemContainer>
       <Row>
         <Col>
           <h1>{item.tekst}</h1>
@@ -59,7 +65,7 @@ const TheItem = ({ item }: TheItemProps) => {
       </Row>
       <Row>
         <Col lg>
-          <Image crossOrigin="anonymous" width="500" height="500" src={url} rounded />
+          <Image crossOrigin="anonymous" width="500" src={url} rounded />
         </Col>
         <Col lg>
           <EditTenancy tenancy={item} />
@@ -73,7 +79,7 @@ const TheItem = ({ item }: TheItemProps) => {
           </Button>
         </Col>
       </Row>
-    </Container>
+    </ItemContainer>
   )
 }
 

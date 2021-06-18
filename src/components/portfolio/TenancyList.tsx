@@ -85,7 +85,7 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
               }}
             >
               <Col>{tenancy.tekst}</Col>
-              <Col md="auto">
+              <Col xs="auto">
                 <CaretRightFill />
               </Col>
             </MyRow>
