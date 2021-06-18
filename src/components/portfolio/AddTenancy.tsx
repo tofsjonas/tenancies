@@ -1,4 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
@@ -17,6 +19,7 @@ type AddTenancyProps = {
 const AddTenancy = ({ hideModal }: AddTenancyProps) => {
   const { t } = useTranslation()
   const { dispatch } = useContext(TenancyContext)
+  const navigate = useNavigate()
 
   const is_mounted = useRef(false)
 
@@ -33,7 +36,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
   const [picked_tenancy, setPickedTenancy] = useState<Tenancy>()
   const [options, setOptions] = useState<Tenancy[]>([])
 
-  const handleSearch = (query: string) => {
+  const handleDAWASearch = (query: string) => {
     setIsLoading(true)
     getAddressInfoFromDAWA({
       query,
@@ -66,6 +69,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
           if (is_mounted.current) {
             setIsSaving(false)
             hideModal()
+            navigate(`tenancy/${data.adgangsadresse.id}`)
           }
         })
         .catch((err) => {
@@ -93,7 +97,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
             isLoading={is_loading}
             labelKey="tekst"
             minLength={3}
-            onSearch={handleSearch}
+            onSearch={handleDAWASearch}
             onChange={handleTenancyPick}
             options={options}
             placeholder={t('add_tenancy_fetch_placeholder')}

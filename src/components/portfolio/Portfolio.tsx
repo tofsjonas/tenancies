@@ -1,9 +1,14 @@
 import React, { useState, useEffect, lazy, Suspense, useRef, useContext } from 'react'
+import styled from '@emotion/styled'
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Navbar from 'react-bootstrap/Navbar'
 import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
+import { PlusLg } from 'react-bootstrap-icons'
+
 import { useTranslation } from 'react-i18next'
 import { getTenanciesFromStorage } from '../../lib/backend'
 import { TenancyContext, SET_TENANCIES } from '../../contexts/TenancyContext'
@@ -11,14 +16,25 @@ import { Routes, Route } from 'react-router-dom'
 import LanguageToggler from '../LanguageToggler'
 import Search from './Search'
 
+const AddTenancy = lazy(() => import('./AddTenancy'))
 const TenancyItem = lazy(() => import('./TenancyItem'))
 const TenancyList = lazy(() => import('./TenancyList'))
 
+const FabButton = styled(Button)`
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+`
+
 const Portfolio = () => {
   const { t } = useTranslation()
-
   const { tenancies, dispatch } = useContext(TenancyContext)
   const [loading, setLoading] = useState(true)
+  const [show_add_modal, setShowAddModal] = useState(false)
+
   const is_mounted = useRef(false)
 
   useEffect(() => {
@@ -42,6 +58,14 @@ const Portfolio = () => {
       is_mounted.current = false
     }
   }, [dispatch])
+
+  const handleCloseAddModal = () => {
+    setShowAddModal(false)
+  }
+
+  const handleAddClick = () => {
+    setShowAddModal(true)
+  }
 
   return (
     <>
@@ -71,6 +95,10 @@ const Portfolio = () => {
           </Routes>
         </Suspense>
       )}
+      <FabButton onClick={handleAddClick}>
+        <PlusLg />
+      </FabButton>
+      <Suspense fallback="loading...">{show_add_modal && <AddTenancy hideModal={handleCloseAddModal} />}</Suspense>
     </>
   )
 }
