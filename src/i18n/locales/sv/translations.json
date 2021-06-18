@@ -20,5 +20,7 @@
   "edit_tenancy_label_utilities": "Verktyg?",
   "edit_tenancy_label_utilities_placeholder": "Lista verktyg...",
   "edit_tenancy_label_tenant_information": "Information om hyresgäst:",
-  "edit_tenancy_label_tenant_information_placeholder": "Information..."
+  "edit_tenancy_label_tenant_information_placeholder": "Information...",
+
+  "tenancy_item_breadcrumb_back_to_list": "Mina fastigheter"
 }
