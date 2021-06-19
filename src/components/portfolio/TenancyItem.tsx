@@ -94,8 +94,10 @@ const TenancyItem = () => {
   useEffect(() => {
     const item = tenancies.filter((obj) => obj.adgangsadresse.id === id)[0]
     if (item) {
+      setError('')
       setItem(item)
     } else {
+      setItem(null)
       setError('Item not found :(')
     }
   }, [tenancies, id])
