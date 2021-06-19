@@ -69,6 +69,11 @@ const Portfolio = () => {
 
   return (
     <>
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand className="mr-auto">{t('overview_navbar_brand')}</Navbar.Brand>
+        <LanguageToggler />
+        <Search tenancies={tenancies} />
+      </Navbar>
       {loading && (
         <Spinner animation="border" role="status">
           <span className="sr-only">Loading...</span>
@@ -83,12 +88,6 @@ const Portfolio = () => {
       )}
       {!loading && tenancies && tenancies.length > 0 && (
         <Suspense fallback="">
-          <Navbar bg="light" expand="lg">
-            <Navbar.Brand className="mr-auto">{t('overview_navbar_brand')}</Navbar.Brand>
-            <LanguageToggler />
-            <Search tenancies={tenancies} />
-          </Navbar>
-
           <Routes>
             <Route path="tenancy/:id" element={<TenancyItem />} />
             <Route path="*" element={<TenancyList tenancies={tenancies} />} />
