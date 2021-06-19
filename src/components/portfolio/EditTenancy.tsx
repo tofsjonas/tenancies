@@ -6,11 +6,15 @@ import Form from 'react-bootstrap/Form'
 import { updateTenancyInStorage } from '../../lib/backend'
 import { Tenancy } from '../../types/global'
 import { UPDATE_TENANCY, TenancyContext } from '../../contexts/TenancyContext'
+import { useForm } from 'react-hook-form'
 
 import { useTranslation } from 'react-i18next'
 
-type tplotOptions = {
-  [key: string]: string | number
+type FormData = {
+  size: number
+  nbr_of_rooms: number
+  utilities: string
+  tenant_information: string
 }
 
 type EditTenancyProps = {
@@ -20,6 +24,9 @@ type EditTenancyProps = {
 const EditTenancy = ({ tenancy }: EditTenancyProps) => {
   const { t } = useTranslation()
   const is_mounted = useRef(false)
+  const { handleSubmit, register, formState } = useForm<FormData>({
+    defaultValues: tenancy.metadata || {},
+  })
 
   useEffect(() => {
     is_mounted.current = true
@@ -30,34 +37,11 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
 
   const { dispatch } = useContext(TenancyContext)
 
-  // const [is_loading, setIsLoading] = useState(false)
   const [is_saving, setIsSaving] = useState(false)
 
-  // const [picked_tenancy, setPickedTenancy] = useState<Tenancy>()
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault()
-    e.stopPropagation()
-
-    const metadata: tplotOptions = {}
-    const elements = (e.target as HTMLFormElement).querySelectorAll('input, textarea')
-
-    let found = false
-
-    for (let i = 0; i < elements.length; i++) {
-      const element = elements[i] as HTMLInputElement
-      const val = element.value.trim()
-      if (val.length) {
-        metadata[element.name] = val
-        found = true
-      }
-    }
-
-    const updated_tenancy: Tenancy = { ...tenancy, metadata }
-    if (!found) {
-      delete updated_tenancy.metadata
-    }
+  const onSubmit = (metadata: FormData) => {
     setIsSaving(true)
+    const updated_tenancy: Tenancy = { ...tenancy, metadata }
 
     updateTenancyInStorage(updated_tenancy)
       .then((data) => {
@@ -67,7 +51,6 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
         })
         if (is_mounted.current) {
           setIsSaving(false)
-          // hideModal()
         }
       })
       .catch((err) => {
@@ -79,12 +62,12 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group controlId="formBasicSize">
+        {formState.isDirty && 'APA'}
         <Form.Label>{t('edit_tenancy_label_size')}</Form.Label>
         <Form.Control
-          defaultValue={tenancy.metadata && tenancy.metadata.size}
-          name="size"
+          {...register('size')}
           type="number"
           step="0.1"
           placeholder={t('edit_tenancy_label_size_placeholder')}
@@ -94,8 +77,8 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
       <Form.Group controlId="formBasicNbrOfRooms">
         <Form.Label>{t('edit_tenancy_label_nbr_of_rooms')}</Form.Label>
         <Form.Control
+          {...register('nbr_of_rooms')}
           defaultValue={tenancy.metadata && tenancy.metadata.nbr_of_rooms}
-          name="nbr_of_rooms"
           type="number"
           step="1"
           placeholder={t('edit_tenancy_label_nbr_of_rooms_placeholder')}
@@ -105,7 +88,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
       <Form.Group controlId="formBasicUtilities">
         <Form.Label>{t('edit_tenancy_label_utilities')}</Form.Label>
         <Form.Control
-          name="utilities"
+          {...register('utilities')}
           defaultValue={tenancy.metadata && tenancy.metadata.utilities}
           as="textarea"
           rows={3}
@@ -116,14 +99,14 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
       <Form.Group controlId="formBasicTenantInformation">
         <Form.Label>{t('edit_tenancy_label_tenant_information')}</Form.Label>
         <Form.Control
+          {...register('tenant_information')}
           defaultValue={tenancy.metadata && tenancy.metadata.tenant_information}
-          name="tenant_information"
           as="textarea"
           rows={3}
           placeholder={t('edit_tenancy_label_tenant_information_placeholder')}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" disabled={!formState.isDirty}>
         {is_saving && (
           <>
             <Spinner animation="border" role="status" size="sm">
