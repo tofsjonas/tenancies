@@ -30,7 +30,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         tenancies: state.tenancies.map((tenancy) => {
-          if (tenancy.adgangsadresse.id === action.payload.adgangsadresse.id) {
+          if (tenancy.id === action.payload.id) {
             return action.payload
           } else {
             return tenancy
@@ -38,7 +38,7 @@ const reducer = (state: State, action: Action): State => {
         }),
       }
     case DELETE_TENANCY:
-      return { ...state, tenancies: state.tenancies.filter((obj) => obj.adgangsadresse.id !== action.payload) }
+      return { ...state, tenancies: state.tenancies.filter((obj) => obj.id !== action.payload) }
     default:
       return state
   }

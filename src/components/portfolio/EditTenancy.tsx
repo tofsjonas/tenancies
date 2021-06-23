@@ -25,7 +25,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
   const { t } = useTranslation()
   const is_mounted = useRef(false)
   const { handleSubmit, register, formState } = useForm<FormData>({
-    defaultValues: tenancy.metadata || {},
+    defaultValues: tenancy || {},
   })
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
 
   const onSubmit = (metadata: FormData) => {
     setIsSaving(true)
-    const updated_tenancy: Tenancy = { ...tenancy, metadata }
+    const updated_tenancy: Tenancy = { ...tenancy, ...metadata }
 
     updateTenancyInStorage(updated_tenancy)
       .then((data) => {
@@ -78,7 +78,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
         <Form.Label>{t('edit_tenancy_label_nbr_of_rooms')}</Form.Label>
         <Form.Control
           {...register('nbr_of_rooms')}
-          defaultValue={tenancy.metadata && tenancy.metadata.nbr_of_rooms}
+          defaultValue={tenancy && tenancy.nbr_of_rooms}
           type="number"
           step="1"
           placeholder={t('edit_tenancy_label_nbr_of_rooms_placeholder')}
@@ -89,7 +89,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
         <Form.Label>{t('edit_tenancy_label_utilities')}</Form.Label>
         <Form.Control
           {...register('utilities')}
-          defaultValue={tenancy.metadata && tenancy.metadata.utilities}
+          defaultValue={tenancy && tenancy.utilities}
           as="textarea"
           rows={3}
           placeholder={t('edit_tenancy_label_utilities_placeholder')}
@@ -100,7 +100,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
         <Form.Label>{t('edit_tenancy_label_tenant_information')}</Form.Label>
         <Form.Control
           {...register('tenant_information')}
-          defaultValue={tenancy.metadata && tenancy.metadata.tenant_information}
+          defaultValue={tenancy && tenancy.tenant_information}
           as="textarea"
           rows={3}
           placeholder={t('edit_tenancy_label_tenant_information_placeholder')}

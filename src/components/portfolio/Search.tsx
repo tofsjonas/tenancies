@@ -30,7 +30,7 @@ const Search = ({ tenancies }: SearchProps) => {
 
   const handleTenancyPick = (pick: Tenancy[]) => {
     if (pick[0]) {
-      navigate(`/tenancy/${pick[0].adgangsadresse.id}`)
+      navigate(`/tenancy/${pick[0].id}`)
     }
   }
 

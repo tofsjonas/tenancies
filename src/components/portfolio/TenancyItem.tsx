@@ -32,7 +32,7 @@ type TheItemProps = {
 }
 
 const TheItem = ({ item }: TheItemProps) => {
-  const url = `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${item.adgangsadresse.y},${item.adgangsadresse.x}&fov=70&pitch=0&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+  const url = `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${item.y},${item.x}&fov=70&pitch=0&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
   // const url = `https://via.placeholder.com/500`
   const { dispatch } = useContext(TenancyContext)
   const navigate = useNavigate()
@@ -42,11 +42,11 @@ const TheItem = ({ item }: TheItemProps) => {
    */
   const handleDeleteClick = () => {
     if (window.confirm('Are you sure?')) {
-      deleteTenancyFromStorage(item.adgangsadresse.id)
+      deleteTenancyFromStorage(item.id)
         .then(() => {
           dispatch({
             type: DELETE_TENANCY,
-            payload: item.adgangsadresse.id,
+            payload: item.id,
           })
           navigate('tenancies')
         })
@@ -92,7 +92,7 @@ const TenancyItem = () => {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    const item = tenancies.filter((obj) => obj.adgangsadresse.id === id)[0]
+    const item = tenancies.filter((obj) => obj.id === id)[0]
     if (item) {
       setError('')
       setItem(item)

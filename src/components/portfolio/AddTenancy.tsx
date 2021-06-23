@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
 import { addTenancyToStorage, getAddressInfoFromDAWA } from '../../lib/backend'
-import { Tenancy } from '../../types/global'
+import { DAWATenancy } from '../../types/global'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'
 import { ADD_TENANCY, TenancyContext } from '../../contexts/TenancyContext'
 
@@ -20,8 +20,11 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
   const { t } = useTranslation()
   const { dispatch } = useContext(TenancyContext)
   const navigate = useNavigate()
-
   const is_mounted = useRef(false)
+  const [is_loading, setIsLoading] = useState(false)
+  const [is_saving, setIsSaving] = useState(false)
+  const [picked_tenancy, setPickedTenancy] = useState<DAWATenancy>()
+  const [options, setOptions] = useState<DAWATenancy[]>([])
 
   useEffect(() => {
     is_mounted.current = true
@@ -29,12 +32,6 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
       is_mounted.current = false
     }
   }, [])
-
-  const [is_loading, setIsLoading] = useState(false)
-  const [is_saving, setIsSaving] = useState(false)
-
-  const [picked_tenancy, setPickedTenancy] = useState<Tenancy>()
-  const [options, setOptions] = useState<Tenancy[]>([])
 
   const handleDAWASearch = (query: string) => {
     setIsLoading(true)
@@ -51,7 +48,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
     })
   }
 
-  const handleTenancyPick = (pick: Tenancy[]) => {
+  const handleTenancyPick = (pick: DAWATenancy[]) => {
     setPickedTenancy(pick[0])
   }
 
@@ -60,16 +57,22 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
     event.stopPropagation()
     if (picked_tenancy) {
       setIsSaving(true)
-      addTenancyToStorage(picked_tenancy)
-        .then((data) => {
+
+      const new_tenancy = {
+        tekst: picked_tenancy.tekst,
+        ...picked_tenancy.adgangsadresse,
+      }
+
+      addTenancyToStorage(new_tenancy)
+        .then(() => {
           dispatch({
             type: ADD_TENANCY,
-            payload: data,
+            payload: new_tenancy,
           })
           if (is_mounted.current) {
             setIsSaving(false)
             hideModal()
-            navigate(`tenancy/${data.adgangsadresse.id}`)
+            navigate(`tenancy/${new_tenancy.id}`)
           }
         })
         .catch((err) => {
@@ -101,7 +104,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
             onChange={handleTenancyPick}
             options={options}
             placeholder={t('add_tenancy_fetch_placeholder')}
-            renderMenuItemChildren={(option: Tenancy) => <span>{option.tekst}</span>}
+            renderMenuItemChildren={(option: DAWATenancy) => <span>{option.tekst}</span>}
           />
         </Modal.Body>
         <Modal.Footer>
