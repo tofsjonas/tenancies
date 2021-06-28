@@ -33,6 +33,8 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
     defaultValues: { size, nbr_of_rooms, tenant_information, utilities },
   })
 
+  const { isDirty, isValid } = formState
+
   useEffect(() => {
     is_mounted.current = true
     return () => {
@@ -67,7 +69,8 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group controlId="formBasicSize">
-        {formState.isDirty && 'APA'}
+        {/* {formState.isDirty ? 'DIRTY' : 'CLEAN'}
+        {formState.isValid ? 'VALID' : 'INVALID'} */}
         <Form.Label>{t('edit_tenancy_label_size')}</Form.Label>
         <Form.Control
           {...register('size')}
@@ -109,7 +112,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
           placeholder={t('edit_tenancy_label_tenant_information_placeholder')}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" disabled={!formState.isDirty || !formState.isValid}>
+      <Button variant="primary" type="submit" disabled={!isDirty || !isValid}>
         {is_saving && (
           <>
             <Spinner animation="border" role="status" size="sm"></Spinner> {t('edit_tenancy_save_button_is_saving')}
