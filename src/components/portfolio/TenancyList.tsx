@@ -81,7 +81,7 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
               className="mt-1 align-items-center"
               key={tenancy.tekst}
               onClick={() => {
-                navigate(`/tenancy/${tenancy.adgangsadresse.id}`)
+                navigate(`/tenancy/${tenancy.id}`)
               }}
             >
               <Col>{tenancy.tekst}</Col>

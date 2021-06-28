@@ -22,5 +22,8 @@
   "edit_tenancy_label_tenant_information": "Information about tenant:",
   "edit_tenancy_label_tenant_information_placeholder": "Enter information...",
 
+  "edit_tenancy_delete_button": "Delete Tenancy",
+  "edit_tenancy_delete_button_is_deleting": "deleting...",
+
   "tenancy_item_breadcrumb_back_to_list": "My Tenancies"
 }

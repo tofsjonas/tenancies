@@ -22,11 +22,18 @@ type EditTenancyProps = {
 }
 
 const EditTenancy = ({ tenancy }: EditTenancyProps) => {
-  const { t } = useTranslation()
   const is_mounted = useRef(false)
-  const { handleSubmit, register, formState } = useForm<FormData>({
-    defaultValues: tenancy.metadata || {},
+  const { t } = useTranslation()
+  const { dispatch } = useContext(TenancyContext)
+  const [is_saving, setIsSaving] = useState(false)
+
+  const { size, nbr_of_rooms, tenant_information, utilities } = tenancy
+
+  const { handleSubmit, register, formState, reset } = useForm<FormData>({
+    defaultValues: { size, nbr_of_rooms, tenant_information, utilities },
   })
+
+  const { isDirty, isValid } = formState
 
   useEffect(() => {
     is_mounted.current = true
@@ -35,19 +42,17 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
     }
   }, [])
 
-  const { dispatch } = useContext(TenancyContext)
-
-  const [is_saving, setIsSaving] = useState(false)
-
-  const onSubmit = (metadata: FormData) => {
+  const onSubmit = (form_data: FormData) => {
+    console.log('FormData', form_data)
     setIsSaving(true)
-    const updated_tenancy: Tenancy = { ...tenancy, metadata }
 
-    updateTenancyInStorage(updated_tenancy)
+    updateTenancyInStorage(tenancy.id, form_data)
       .then((data) => {
+        reset(form_data) // so the form is no longer dirty
+        const updated_tenancy: Tenancy = { ...tenancy, ...data }
         dispatch({
           type: UPDATE_TENANCY,
-          payload: data,
+          payload: updated_tenancy,
         })
         if (is_mounted.current) {
           setIsSaving(false)
@@ -64,7 +69,8 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group controlId="formBasicSize">
-        {formState.isDirty && 'APA'}
+        {/* {formState.isDirty ? 'DIRTY' : 'CLEAN'}
+        {formState.isValid ? 'VALID' : 'INVALID'} */}
         <Form.Label>{t('edit_tenancy_label_size')}</Form.Label>
         <Form.Control
           {...register('size')}
@@ -78,7 +84,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
         <Form.Label>{t('edit_tenancy_label_nbr_of_rooms')}</Form.Label>
         <Form.Control
           {...register('nbr_of_rooms')}
-          defaultValue={tenancy.metadata && tenancy.metadata.nbr_of_rooms}
+          defaultValue={tenancy && tenancy.nbr_of_rooms}
           type="number"
           step="1"
           placeholder={t('edit_tenancy_label_nbr_of_rooms_placeholder')}
@@ -89,7 +95,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
         <Form.Label>{t('edit_tenancy_label_utilities')}</Form.Label>
         <Form.Control
           {...register('utilities')}
-          defaultValue={tenancy.metadata && tenancy.metadata.utilities}
+          defaultValue={tenancy && tenancy.utilities}
           as="textarea"
           rows={3}
           placeholder={t('edit_tenancy_label_utilities_placeholder')}
@@ -100,19 +106,16 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
         <Form.Label>{t('edit_tenancy_label_tenant_information')}</Form.Label>
         <Form.Control
           {...register('tenant_information')}
-          defaultValue={tenancy.metadata && tenancy.metadata.tenant_information}
+          defaultValue={tenancy && tenancy.tenant_information}
           as="textarea"
           rows={3}
           placeholder={t('edit_tenancy_label_tenant_information_placeholder')}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" disabled={!formState.isDirty}>
+      <Button variant="primary" type="submit" disabled={!isDirty || !isValid}>
         {is_saving && (
           <>
-            <Spinner animation="border" role="status" size="sm">
-              <span className="sr-only">Loading...</span>
-            </Spinner>{' '}
-            {t('edit_tenancy_save_button_is_saving')}
+            <Spinner animation="border" role="status" size="sm"></Spinner> {t('edit_tenancy_save_button_is_saving')}
           </>
         )}
         {!is_saving && t('edit_tenancy_save_button')}

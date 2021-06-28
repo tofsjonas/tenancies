@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { TenancyContext, DELETE_TENANCY } from '../../contexts/TenancyContext'
 import { Tenancy } from '../../types/global'
@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import Spinner from 'react-bootstrap/Spinner'
 import { XLg } from 'react-bootstrap-icons'
 import { useTranslation } from 'react-i18next'
 
@@ -32,27 +33,49 @@ type TheItemProps = {
 }
 
 const TheItem = ({ item }: TheItemProps) => {
-  const url = `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${item.adgangsadresse.y},${item.adgangsadresse.x}&fov=70&pitch=0&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
-  // const url = `https://via.placeholder.com/500`
+  const url =
+    process.env.NODE_ENV === 'production'
+      ? `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${item.y},${item.x}&fov=70&pitch=0&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+      : `https://via.placeholder.com/500`
+  const { t } = useTranslation()
+
+  const [is_deleting, setIsDeleting] = useState(false)
+
   const { dispatch } = useContext(TenancyContext)
   const navigate = useNavigate()
+
+  const is_mounted = useRef(false)
+
+  useEffect(() => {
+    is_mounted.current = true
+    return () => {
+      is_mounted.current = false
+    }
+  }, [])
 
   /**
    * @todo make it purdier than window.confirm
    */
   const handleDeleteClick = () => {
+    setIsDeleting(true)
     if (window.confirm('Are you sure?')) {
-      deleteTenancyFromStorage(item.adgangsadresse.id)
+      deleteTenancyFromStorage(item.id)
         .then(() => {
           dispatch({
             type: DELETE_TENANCY,
-            payload: item.adgangsadresse.id,
+            payload: item.id,
           })
           navigate('tenancies')
+          if (is_mounted.current) {
+            setIsDeleting(false)
+          }
         })
         .catch((err) => {
+          setIsDeleting(false)
           console.log(err)
         })
+    } else {
+      setIsDeleting(false)
     }
   }
 
@@ -65,7 +88,12 @@ const TheItem = ({ item }: TheItemProps) => {
       </Row>
       <Row>
         <Col lg>
-          <Image crossOrigin="anonymous" width="500" src={url} rounded />
+          <Image
+            crossOrigin={process.env.NODE_ENV === 'production' ? 'anonymous' : undefined}
+            width="500"
+            src={url}
+            rounded
+          />
         </Col>
         <Col lg>
           <EditTenancy tenancy={item} />
@@ -75,7 +103,17 @@ const TheItem = ({ item }: TheItemProps) => {
         <Col>
           <br />
           <Button variant="danger" onClick={handleDeleteClick}>
-            <XLg /> Delete Tenancy
+            {is_deleting && (
+              <>
+                <Spinner animation="border" role="status" size="sm"></Spinner>{' '}
+                {t('edit_tenancy_delete_button_is_deleting')}
+              </>
+            )}
+            {!is_deleting && (
+              <>
+                <XLg /> {t('edit_tenancy_delete_button')}
+              </>
+            )}
           </Button>
         </Col>
       </Row>
@@ -92,7 +130,7 @@ const TenancyItem = () => {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    const item = tenancies.filter((obj) => obj.adgangsadresse.id === id)[0]
+    const item = tenancies.filter((obj) => obj.id === id)[0]
     if (item) {
       setError('')
       setItem(item)
