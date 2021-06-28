@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Tenancy, DAWATenancy } from '../types/global'
+import { Tenancy, DAWATenancy, TenancyMetaData } from '../types/global'
 import db, { firestore } from '../firebase/firebase.config'
 
 type AddressParams = {
@@ -22,94 +22,36 @@ export const getAddressInfoFromDAWA = ({ query, success, fail }: AddressParams):
     })
 }
 
-export const getTenanciesFromStorage = async () => {
-  return new Promise<Tenancy[]>((resolve, reject) => {
-    const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
-    try {
-      const parsed_json = JSON.parse(tenancies_as_json_string)
-      // to fake load time
-      setTimeout(() => {
-        resolve(parsed_json)
-      }, 200)
-    } catch (error) {
-      localStorage.setItem('tenancies', '')
-      reject(new Error('Data corrupt, resetting!'))
-    }
-  })
-}
-
-export const updateTenancyInStorage = async (obj: Tenancy) => {
-  return new Promise<Tenancy>((resolve, reject) => {
-    const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
-    try {
-      obj.updated = new Date().toISOString()
-      const tenancies = (JSON.parse(tenancies_as_json_string) as Tenancy[]).map((tenancy) => {
-        if (tenancy.id === obj.id) {
-          return obj
-        } else {
-          return tenancy
-        }
-      })
-
-      localStorage.setItem('tenancies', JSON.stringify(tenancies))
-      // to fake load time
-      setTimeout(() => {
-        resolve(obj)
-      }, 600)
-    } catch (error) {
-      reject(error)
-    }
-  })
+export const updateTenancyInStorage = async (id: string, obj: TenancyMetaData) => {
+  const new_obj = {
+    ...obj,
+    updated: firestore.FieldValue.serverTimestamp(),
+  }
+  await db.collection('tenancies').doc(id).update(new_obj)
+  return new_obj
 }
 
 export const deleteTenancyFromStorage = async (id: string) => {
-  return new Promise<void>((resolve, reject) => {
-    const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
-    try {
-      const tenancies = JSON.parse(tenancies_as_json_string)
-      const new_tenancies = tenancies.filter((obj: Tenancy) => obj.id !== id)
-      localStorage.setItem('tenancies', JSON.stringify(new_tenancies))
-      // to fake load time
-      setTimeout(() => {
-        resolve()
-      }, 200)
-    } catch (error) {
-      reject(error)
-    }
-  })
+  await db.collection('tenancies').doc(id).delete()
 }
 
-export const fetchBlogs = async () => {
+export const getTenanciesFromStorage = async () => {
+  const result: Tenancy[] = []
   const response = db.collection('tenancies')
   const data = await response.get()
   data.docs.forEach((item) => {
-    // console.log(item.id, item.data())
-    // console.log(item.metadata.docs)
-    // item.collection('metadata').docs.forEach((res) => {
-    //   console.log(res)
-    // })
-    // setBlogs([...blogs, item.data()])
+    result.push(item.data() as Tenancy)
   })
+  return result
 }
 
-/**
- * @todo ensure unique addresses
- */
-
 export const addTenancyToStorage = async (obj: Tenancy) => {
-  return new Promise<Tenancy>((resolve, reject) => {
-    const tenancies_as_json_string = localStorage.getItem('tenancies') || '[]'
-    try {
-      obj.created = new Date().toISOString()
-      const tenancies = JSON.parse(tenancies_as_json_string)
-      tenancies.push(obj)
-      localStorage.setItem('tenancies', JSON.stringify(tenancies))
-      // to fake load time
-      setTimeout(() => {
-        resolve(obj)
-      }, 600)
-    } catch (error) {
-      reject(error)
-    }
-  })
+  const new_obj = {
+    ...obj,
+    created: firestore.FieldValue.serverTimestamp(),
+    updated: firestore.FieldValue.serverTimestamp(),
+    location: new firestore.GeoPoint(obj.x, obj.y),
+  }
+  await db.collection('tenancies').doc(obj.id).set(new_obj)
+  return new_obj
 }

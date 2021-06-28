@@ -1,4 +1,4 @@
-type TenancyMetaData = {
+export type TenancyMetaData = {
   size?: number
   nbr_of_rooms?: number
   utilities?: string
@@ -18,8 +18,8 @@ type AdgangsAdresseMetaData = {
   stormodtagerpostnr?: string | null
   stormodtagerpostnrnavn?: string | null
   kommunekode?: string | null
-  x?: number | null
-  y?: number | null
+  x: number
+  y: number
   href?: string | null
 }
 
@@ -38,10 +38,12 @@ export type DAWATenancy = {
 //   updated_date?: string
 //   metadata?: TenancyMetaData
 // }
-
+type FirestoreTimestamp = import('firebase').firestore.Timestamp
+type FirestoreLocation = import('firebase').firestore.Location
 export type Tenancy = {
   tekst: string
-  created?: string
-  updated?: string
+  created?: FirestoreTimestamp
+  updated?: FirestoreTimestamp
+  location?: FirestoreLocation
 } & TenancyMetaData &
   AdgangsAdresseMetaData
