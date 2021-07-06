@@ -9736,6 +9736,11 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-bootstrap-hooks-alert@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-hooks-alert/-/react-bootstrap-hooks-alert-1.0.4.tgz#acb381dda501149b363958bf4054f56b47fd6cb5"
+  integrity sha512-IrJdmgM6fm9n/7+ACz9sib6/LTvH+bcUS+DUttg84lgujRkNfsljG5/2eZTN5p8SrQX4mkQ6bikFSOVPzUOd7Q==
+
 react-bootstrap-icons@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/react-bootstrap-icons/-/react-bootstrap-icons-1.5.0.tgz#30ccd09cac69e4037c4cb500cc704d04c4a466a4"

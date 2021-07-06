@@ -1,5 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAlert } from 'react-bootstrap-hooks-alert'
 
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -18,6 +19,7 @@ type AddTenancyProps = {
 
 const AddTenancy = ({ hideModal }: AddTenancyProps) => {
   const { t } = useTranslation()
+  const { success } = useAlert()
   const { dispatch } = useContext(TenancyContext)
   const navigate = useNavigate()
   const is_mounted = useRef(false)
@@ -70,6 +72,8 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
             payload: new_tenancy,
           })
           if (is_mounted.current) {
+            success(t('add_tenancy_confirmation'))
+
             setIsSaving(false)
             hideModal()
             navigate(`tenancy/${new_tenancy.id}`)

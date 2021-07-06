@@ -9,6 +9,7 @@
   "add_tenancy_start_typing_to_fetch": "Börja skriva för att hämta adress:",
   "add_tenancy_fetch_placeholder": "Adress...",
   "add_tenancy_modal_title": "Lägg till fastighet",
+  "add_tenancy_confirmation": "Din fastighet har lagts till!",
 
   "edit_tenancy_cancel_button": "Avbryt",
   "edit_tenancy_save_button": "Spara ändringar",
@@ -23,6 +24,8 @@
   "edit_tenancy_label_tenant_information_placeholder": "Information...",
   "edit_tenancy_delete_button": "Ta bort fastighet",
   "edit_tenancy_delete_button_is_deleting": "tar bort...",
+  "edit_tenancy_saved_confirmation": "Dina ändringar har sparats!",
 
+  "tenancy_was_deleted_confirmation": "Din fastighet är borttagen!",
   "tenancy_item_breadcrumb_back_to_list": "Mina fastigheter"
 }
