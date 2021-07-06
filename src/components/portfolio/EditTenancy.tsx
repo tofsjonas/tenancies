@@ -1,5 +1,4 @@
 import React, { useState, useContext, useRef, useEffect } from 'react'
-// import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
@@ -7,6 +6,7 @@ import { updateTenancyInStorage } from '../../lib/backend'
 import { Tenancy } from '../../types/global'
 import { UPDATE_TENANCY, TenancyContext } from '../../contexts/TenancyContext'
 import { useForm } from 'react-hook-form'
+import { useAlert } from 'react-bootstrap-hooks-alert'
 
 import { useTranslation } from 'react-i18next'
 
@@ -22,6 +22,7 @@ type EditTenancyProps = {
 }
 
 const EditTenancy = ({ tenancy }: EditTenancyProps) => {
+  const { success } = useAlert()
   const is_mounted = useRef(false)
   const { t } = useTranslation()
   const { dispatch } = useContext(TenancyContext)
@@ -43,7 +44,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
   }, [])
 
   const onSubmit = (form_data: FormData) => {
-    console.log('FormData', form_data)
+    // console.log('FormData', form_data)
     setIsSaving(true)
 
     updateTenancyInStorage(tenancy.id, form_data)
@@ -54,6 +55,8 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
           type: UPDATE_TENANCY,
           payload: updated_tenancy,
         })
+        success(t('edit_tenancy_saved_confirmation'))
+
         if (is_mounted.current) {
           setIsSaving(false)
         }

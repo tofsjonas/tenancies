@@ -10,6 +10,7 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Spinner from 'react-bootstrap/Spinner'
 import { XLg } from 'react-bootstrap-icons'
 import { useTranslation } from 'react-i18next'
+import { useAlert } from 'react-bootstrap-hooks-alert'
 
 import Image from 'react-bootstrap/Image'
 
@@ -38,6 +39,7 @@ const TheItem = ({ item }: TheItemProps) => {
       ? `https://maps.googleapis.com/maps/api/streetview?size=400x400&location=${item.y},${item.x}&fov=70&pitch=0&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
       : `https://via.placeholder.com/500`
   const { t } = useTranslation()
+  const { success } = useAlert()
 
   const [is_deleting, setIsDeleting] = useState(false)
 
@@ -65,7 +67,9 @@ const TheItem = ({ item }: TheItemProps) => {
             type: DELETE_TENANCY,
             payload: item.id,
           })
+          success(t('tenancy_was_deleted_confirmation'))
           navigate('tenancies')
+
           if (is_mounted.current) {
             setIsDeleting(false)
           }

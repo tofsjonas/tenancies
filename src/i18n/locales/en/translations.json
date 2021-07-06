@@ -9,6 +9,7 @@
   "add_tenancy_start_typing_to_fetch": "Start typing to fetch address info:",
   "add_tenancy_fetch_placeholder": "Enter address...",
   "add_tenancy_modal_title": "Add new Tenancy",
+  "add_tenancy_confirmation": "Your tenancy was added!",
 
   "edit_tenancy_cancel_button": "Cancel",
   "edit_tenancy_save_button": "Save changes",
@@ -21,9 +22,11 @@
   "edit_tenancy_label_utilities_placeholder": "List utilities...",
   "edit_tenancy_label_tenant_information": "Information about tenant:",
   "edit_tenancy_label_tenant_information_placeholder": "Enter information...",
+  "edit_tenancy_saved_confirmation": "Your changes have been saved!",
 
   "edit_tenancy_delete_button": "Delete Tenancy",
   "edit_tenancy_delete_button_is_deleting": "deleting...",
 
+  "tenancy_was_deleted_confirmation": "Your tenancy was deleted!",
   "tenancy_item_breadcrumb_back_to_list": "My Tenancies"
 }
