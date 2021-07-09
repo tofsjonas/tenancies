@@ -16,7 +16,7 @@ import Image from 'react-bootstrap/Image'
 
 import EditTenancy from './EditTenancy'
 import styled from '@emotion/styled'
-import { deleteTenancyFromStorage } from '../../lib/backend'
+import { deleteTenancyFromStorage } from '../../lib/storage'
 
 const MyCrumb = styled(Breadcrumb)`
   ol {

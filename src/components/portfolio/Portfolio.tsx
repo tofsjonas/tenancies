@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button'
 import { PlusLg } from 'react-bootstrap-icons'
 
 import { useTranslation } from 'react-i18next'
-import { getTenanciesFromStorage } from '../../lib/backend'
+import { getTenanciesFromStorage } from '../../lib/storage'
 import { TenancyContext, SET_TENANCIES } from '../../contexts/TenancyContext'
 import { Routes, Route } from 'react-router-dom'
 import LanguageToggler from '../LanguageToggler'
