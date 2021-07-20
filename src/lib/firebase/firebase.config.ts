@@ -16,11 +16,11 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-export { firebase }
+export { firebase as firebaseApp }
 
 export const firestore = firebase.firestore
 export const auth = firebase.auth()
-
+auth.useDeviceLanguage()
 const db = firestore()
 firebase.analytics()
 

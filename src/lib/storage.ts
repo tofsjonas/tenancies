@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Tenancy, DAWATenancy, TenancyMetaData } from '../types/global'
-import db, { firestore } from '../firebase/firebase.config'
+import db, { firestore } from './firebase/firebase.config'
 
 type AddressParams = {
   query: string

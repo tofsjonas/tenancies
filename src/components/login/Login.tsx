@@ -1,44 +1,48 @@
-import React from 'react'
-// import { auth, firebase } from '../../firebase/firebase.config'
-// import { useAuthState } from 'react-firebase-hooks/auth'
-import Button from 'react-bootstrap/Button'
-import { signInAnonymously, signOut } from '../../lib/auth'
+import React from 'react' // useContext
+// import Button from 'react-bootstrap/Button'
+// import { signInAnonymously, signOut } from 'lib/auth'
+// import { useAlert } from 'react-bootstrap-hooks-alert'
+// import { useLocation, useNavigate } from 'react-router-dom'
 
-import { AuthContext, LOGOUT_USER, SET_IS_LOADING, SET_USER } from '../../contexts/AuthContext'
+// import { AuthContext, SET_IS_LOADING } from 'contexts/AuthContext'
+// import LoginWithEmail from './LoginWithEmail'
+import FirebaseLogin from './FirebaseLogin'
 
 const Login = () => {
-  // const [user, loading, error] = useAuthState(auth)
-  const { dispatch } = React.useContext(AuthContext)
+  // const { user, dispatch } = useContext(AuthContext)
+  // const { success } = useAlert()
+  // const location = useLocation()
+  // const navigate = useNavigate()
+  // return location.pathname;
 
-  const handleLogin = () => {
-    dispatch({
-      type: SET_IS_LOADING,
-      payload: true,
-    })
+  // console.log(location.pathname)
 
-    signInAnonymously()
-      // .then(() => {
-      //   console.log('logged in!')
-      // })
-      .catch(alert)
-  }
-  const handleLogout = () => {
-    dispatch({
-      type: SET_IS_LOADING,
-      payload: true,
-    })
-    signOut()
-      // .then(() => {
-      //   console.log('logged out!')
-      // })
-      .catch(alert)
-    // signInAnonymously().catch(alert)
-  }
+  // const handleSignInAnonymously = () => {
+  //   dispatch({
+  //     type: SET_IS_LOADING,
+  //     payload: true,
+  //   })
+
+  //   signInAnonymously()
+  //     .then(() => {
+  //       if (location.pathname === '/login') {
+  //         navigate('/')
+  //       }
+  //     })
+  //     .catch(alert)
+  // }
+  // const handleLogout = () => {
+  //   signOut()
+  //     .then(() => {
+  //       success('you have been logged out')
+  //     })
+  //     .catch(alert)
+  // }
 
   return (
-    <div className="Login">
-      <Button onClick={handleLogin}>signInAnonymously</Button>
-      <Button onClick={handleLogout}>SignOut</Button>
+    <div className="login">
+      <h1 className="text-center">Login</h1>
+      <FirebaseLogin />
     </div>
   )
 }

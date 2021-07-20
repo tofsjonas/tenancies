@@ -1,12 +1,12 @@
-import { firebase } from '../firebase/firebase.config'
+import { firebaseApp } from './firebase/firebase.config'
 
 export const signInAnonymously = async () => {
-  console.log('logging in!')
-  await firebase.auth().signInAnonymously()
+  // console.log('logging in!')
+  await firebaseApp.auth().signInAnonymously()
 }
 
 export const signOut = async () => {
-  firebase.auth().signOut()
+  firebaseApp.auth().signOut()
   // auth.signInAnonymously().catch(alert);
 }
 
