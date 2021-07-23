@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Login from './login/Login'
-// import { useAuthState } from 'react-firebase-hooks/auth'
 import Spinner from 'react-bootstrap/Spinner'
 import { AuthContext } from '../contexts/AuthContext'
 import Portfolio from './portfolio/Portfolio'
@@ -31,7 +30,6 @@ const MyRoutes = () => {
               <Route path="*" element={<Login />} />
             </>
           )}
-          {/* <Route path="*" element={<Portfolio />} /> */}
         </Routes>
       )}
     </>

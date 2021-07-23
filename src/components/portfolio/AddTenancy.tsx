@@ -6,18 +6,22 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
-import { addTenancyToStorage, getAddressInfoFromDAWA } from '../../lib/storage'
-import { DAWATenancy } from '../../types/global'
+import { addTenancyToStorage } from 'lib/storage'
+import { getAddressInfoFromDAWA } from 'lib/dawa'
+
+import { DAWATenancy, Tenancy } from '../../types/global'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead'
 import { ADD_TENANCY, TenancyContext } from '../../contexts/TenancyContext'
 
 import { useTranslation } from 'react-i18next'
+import { AuthContext } from 'contexts/AuthContext'
 
 type AddTenancyProps = {
   hideModal: () => void
 }
 
 const AddTenancy = ({ hideModal }: AddTenancyProps) => {
+  const { user } = useContext(AuthContext)
   const { t } = useTranslation()
   const { success } = useAlert()
   const { dispatch } = useContext(TenancyContext)
@@ -45,7 +49,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
       },
       fail: (err) => {
         setIsLoading(false)
-        console.log(err)
+        console.log(err.message)
       },
     })
   }
@@ -65,15 +69,14 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
         ...picked_tenancy.adgangsadresse,
       }
 
-      addTenancyToStorage(new_tenancy)
-        .then(() => {
-          dispatch({
-            type: ADD_TENANCY,
-            payload: new_tenancy,
-          })
+      addTenancyToStorage(new_tenancy, user)
+        .then((obj) => {
           if (is_mounted.current) {
+            dispatch({
+              type: ADD_TENANCY,
+              payload: obj as Tenancy,
+            })
             success(t('add_tenancy_confirmation'))
-
             setIsSaving(false)
             hideModal()
             navigate(`tenancy/${new_tenancy.id}`)
@@ -83,7 +86,7 @@ const AddTenancy = ({ hideModal }: AddTenancyProps) => {
           if (is_mounted.current) {
             setIsSaving(false)
           }
-          console.log(err)
+          console.log(`ADD FAILED:\n${err.message}`)
         })
     }
   }

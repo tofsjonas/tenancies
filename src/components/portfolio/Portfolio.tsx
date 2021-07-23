@@ -15,8 +15,7 @@ import { TenancyContext, SET_TENANCIES } from '../../contexts/TenancyContext'
 import { Routes, Route } from 'react-router-dom'
 import Search from './Search'
 import MySpinner from '../MySpinner'
-
-// import { useAlert } from 'react-bootstrap-hooks-alert'
+import { AuthContext } from 'contexts/AuthContext'
 
 const AddTenancy = lazy(() => import('./AddTenancy'))
 const TenancyItem = lazy(() => import('./TenancyItem'))
@@ -32,7 +31,7 @@ const FabButton = styled(Button)`
 `
 
 const Portfolio = () => {
-  // const { success, danger, warning } = useAlert()
+  const { user } = useContext(AuthContext)
 
   const { t } = useTranslation()
   const { tenancies, dispatch } = useContext(TenancyContext)
@@ -45,7 +44,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     is_mounted.current = true
-    getTenanciesFromStorage()
+    getTenanciesFromStorage(user)
       .then((data) => {
         if (is_mounted.current) {
           dispatch({
@@ -64,7 +63,7 @@ const Portfolio = () => {
     return () => {
       is_mounted.current = false
     }
-  }, [dispatch, warning])
+  }, [dispatch, warning, user])
 
   const handleCloseAddModal = () => {
     setShowAddModal(false)

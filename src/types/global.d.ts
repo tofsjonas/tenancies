@@ -1,3 +1,6 @@
+export type DAWA_ID = string
+export type DB_ID = string
+
 export type TenancyMetaData = {
   size?: number
   nbr_of_rooms?: number
@@ -5,7 +8,7 @@ export type TenancyMetaData = {
   tenant_information?: string
 }
 type AdgangsAdresseMetaData = {
-  id: string
+  id: DAWA_ID
   status?: number
   darstatus?: number
   vejkode?: string | null
@@ -31,16 +34,11 @@ export type DAWATenancy = {
   metadata?: TenancyMetaData
 }
 
-// export type Tenancy = {
-//   tekst: string
-//   adgangsadresse: AdgangsAdresseMetaData
-//   created_date?: string
-//   updated_date?: string
-//   metadata?: TenancyMetaData
-// }
 type FirestoreTimestamp = import('firebase').firestore.Timestamp
 type FirestoreLocation = import('firebase').firestore.Location
 export type Tenancy = {
+  owner?: DB_ID
+  db_id?: DB_ID
   tekst: string
   created?: FirestoreTimestamp
   updated?: FirestoreTimestamp

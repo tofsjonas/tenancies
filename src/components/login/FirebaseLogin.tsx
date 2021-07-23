@@ -11,14 +11,14 @@ const uiConfig = {
   signInFlow: 'popup',
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.
-    firebaseApp.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebaseApp.auth.FacebookAuthProvider.PROVIDER_ID,
-    firebaseApp.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebaseApp.auth.GithubAuthProvider.PROVIDER_ID,
-    firebaseApp.auth.EmailAuthProvider.PROVIDER_ID,
-    firebaseApp.auth.PhoneAuthProvider.PROVIDER_ID,
-    // firebaseApp.auth.AnonymousAuthProvider.PROVIDER_ID,
     firebaseuiAuth.AnonymousAuthProvider.PROVIDER_ID,
+    firebaseApp.auth.EmailAuthProvider.PROVIDER_ID,
+    // firebaseApp.auth.PhoneAuthProvider.PROVIDER_ID,
+    firebaseApp.auth.GoogleAuthProvider.PROVIDER_ID,
+    // firebaseApp.auth.FacebookAuthProvider.PROVIDER_ID,
+    // firebaseApp.auth.TwitterAuthProvider.PROVIDER_ID,
+    // firebaseApp.auth.GithubAuthProvider.PROVIDER_ID,
+    // firebaseApp.auth.AnonymousAuthProvider.PROVIDER_ID,
   ],
   callbacks: {
     signInSuccessWithAuthResult: () => false,

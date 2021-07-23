@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { TenancyContext, DELETE_TENANCY } from '../../contexts/TenancyContext'
-import { Tenancy } from '../../types/global'
+import { TenancyContext, DELETE_TENANCY } from 'contexts/TenancyContext'
+import { Tenancy, DB_ID } from 'types/global'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -16,7 +16,8 @@ import Image from 'react-bootstrap/Image'
 
 import EditTenancy from './EditTenancy'
 import styled from '@emotion/styled'
-import { deleteTenancyFromStorage } from '../../lib/storage'
+import { deleteTenancyFromStorage } from 'lib/storage'
+import { AuthContext } from 'contexts/AuthContext'
 
 const MyCrumb = styled(Breadcrumb)`
   ol {
@@ -40,6 +41,7 @@ const TheItem = ({ item }: TheItemProps) => {
       : `https://via.placeholder.com/500`
   const { t } = useTranslation()
   const { success } = useAlert()
+  const { user } = useContext(AuthContext)
 
   const [is_deleting, setIsDeleting] = useState(false)
 
@@ -61,7 +63,7 @@ const TheItem = ({ item }: TheItemProps) => {
   const handleDeleteClick = () => {
     setIsDeleting(true)
     if (window.confirm('Are you sure?')) {
-      deleteTenancyFromStorage(item.id)
+      deleteTenancyFromStorage(item.db_id as DB_ID, user)
         .then(() => {
           dispatch({
             type: DELETE_TENANCY,

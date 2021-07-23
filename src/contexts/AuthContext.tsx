@@ -67,7 +67,7 @@ const AuthProvider: React.FC = ({ children }) => {
         const user = {
           uid: firebase_user.uid,
           is_anonymous: firebase_user.isAnonymous,
-          name: firebase_user.displayName || 'Anonymous',
+          name: firebase_user.displayName || 'Guest',
         }
         dispatch({
           type: SET_USER,
