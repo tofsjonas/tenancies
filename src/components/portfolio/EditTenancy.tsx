@@ -2,8 +2,8 @@ import React, { useState, useContext, useRef, useEffect } from 'react'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
 import Form from 'react-bootstrap/Form'
-import { updateTenancyInStorage } from '../../lib/backend'
-import { Tenancy } from '../../types/global'
+import { updateTenancyInStorage } from '../../lib/storage'
+import { Tenancy, DB_ID } from '../../types/global'
 import { UPDATE_TENANCY, TenancyContext } from '../../contexts/TenancyContext'
 import { useForm } from 'react-hook-form'
 import { useAlert } from 'react-bootstrap-hooks-alert'
@@ -34,6 +34,7 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
     defaultValues: { size, nbr_of_rooms, tenant_information, utilities },
   })
 
+  // otherwise isDirty and isValid are not updated...
   const { isDirty, isValid } = formState
 
   useEffect(() => {
@@ -47,7 +48,13 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
     // console.log('FormData', form_data)
     setIsSaving(true)
 
-    updateTenancyInStorage(tenancy.id, form_data)
+    const post = {
+      id: tenancy.db_id as DB_ID,
+      data: form_data,
+      // user,
+    }
+
+    updateTenancyInStorage(post)
       .then((data) => {
         reset(form_data) // so the form is no longer dirty
         const updated_tenancy: Tenancy = { ...tenancy, ...data }
@@ -72,8 +79,6 @@ const EditTenancy = ({ tenancy }: EditTenancyProps) => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group controlId="formBasicSize">
-        {/* {formState.isDirty ? 'DIRTY' : 'CLEAN'}
-        {formState.isValid ? 'VALID' : 'INVALID'} */}
         <Form.Label>{t('edit_tenancy_label_size')}</Form.Label>
         <Form.Control
           {...register('size')}
