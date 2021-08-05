@@ -10,7 +10,7 @@ const MyRoutes = () => {
 
   return (
     <>
-      {user && user.uid}
+      {/* {user && user.uid} */}
       {is_loading && (
         <>
           <Spinner animation="border" /> ...authenticating...

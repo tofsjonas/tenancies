@@ -3,12 +3,15 @@ import { Tenancy } from '../../types/global'
 import Pagination from 'react-bootstrap/Pagination'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Image from 'react-bootstrap/Image'
+
 import Container from 'react-bootstrap/Container'
 import { useNavigate } from 'react-router-dom'
 
 import styled from '@emotion/styled'
 import { CaretRightFill } from 'react-bootstrap-icons'
 
+const MyContainer = styled(Container)``
 const MyRow = styled(Row)`
   line-height: 40px;
 
@@ -22,9 +25,45 @@ type TenancyListProps = {
   tenancies: Tenancy[]
 }
 
-const TenancyList = ({ tenancies }: TenancyListProps) => {
+const ItemList = ({ tenancies }: TenancyListProps) => {
   const navigate = useNavigate()
+  return (
+    <MyContainer>
+      {tenancies.map((item) => (
+        <MyRow
+          className="mt-1 align-items-center"
+          key={item.tekst}
+          onClick={() => {
+            navigate(`/tenancy/${item.id}`)
+          }}
+        >
+          <Col xs="auto">
+            <Image
+              crossOrigin={process.env.NODE_ENV === 'production' ? 'anonymous' : undefined}
+              width="40"
+              src={
+                process.env.NODE_ENV === 'production'
+                  ? `https://maps.googleapis.com/maps/api/streetview?size=40x40&location=${item.y},${item.x}&fov=70&pitch=0&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+                  : `https://via.placeholder.com/40`
+              }
+              roundedCircle
+            />
+          </Col>
+          <Col className="d-sm-none">{item.adresseringsvejnavn}</Col>
+          <Col className="d-none d-sm-block">{item.tekst}</Col>
+          <Col xs="auto">
+            <CaretRightFill />
+          </Col>
+        </MyRow>
+      ))}
+      <Row>
+        <Col>{/* <TenancyItemList tenancies={tenancies} /> */}</Col>
+      </Row>
+    </MyContainer>
+  )
+}
 
+const TenancyList = ({ tenancies }: TenancyListProps) => {
   const items_per_page = parseInt(process.env.REACT_APP_NUMBER_OF_ITEMS_IN_TENANCY_LIST || '10')
   const [items, setItems] = useState<Tenancy[]>()
   const [page_count, setPageCount] = useState(1)
@@ -73,30 +112,6 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
 
   return (
     <Container>
-      {items && items.length > 0 && (
-        <>
-          {items.map((tenancy) => (
-            <MyRow
-              className="mt-1 align-items-center"
-              key={tenancy.tekst}
-              onClick={() => {
-                navigate(`/tenancy/${tenancy.id}`)
-              }}
-            >
-              <Col>{tenancy.tekst}</Col>
-              <Col xs="auto">
-                <CaretRightFill />
-              </Col>
-            </MyRow>
-          ))}
-          {page_count > 1 && (
-            <>
-              <br />
-              <Pagination>{getPaginationItems()}</Pagination>
-            </>
-          )}
-        </>
-      )}
       {items && items.length === 0 && (
         <Row className="mt-1 align-items-center">
           <Col>
@@ -105,7 +120,24 @@ const TenancyList = ({ tenancies }: TenancyListProps) => {
           </Col>
         </Row>
       )}
+      {items && items.length > 0 && (
+        <Row className="mt-1" style={{ minHeight: 460 }}>
+          <Col>
+            <ItemList tenancies={items} />
+          </Col>
+        </Row>
+      )}
+
+      {page_count > 1 && (
+        <Row className="mt-1">
+          <Col>
+            <hr />
+            <Pagination className="d-flex justify-content-center">{getPaginationItems()}</Pagination>
+          </Col>
+        </Row>
+      )}
     </Container>
   )
 }
+
 export default TenancyList
