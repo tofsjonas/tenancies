@@ -5,8 +5,9 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Navbar from 'react-bootstrap/Navbar'
+
 import Button from 'react-bootstrap/Button'
-import { PlusLg } from 'react-bootstrap-icons'
+import { PlusLg, Search as SearchIcon } from 'react-bootstrap-icons'
 import { useAlert } from 'react-bootstrap-hooks-alert'
 
 import { useTranslation } from 'react-i18next'
@@ -75,10 +76,24 @@ const Portfolio = () => {
 
   return (
     <>
-      <Navbar bg="primary" expand="lg">
+      {/* <Navbar bg="primary" expand="lg">
         <Navbar.Brand className="mr-auto">{t('overview_navbar_brand')}</Navbar.Brand>
         <Search tenancies={tenancies} />
+      </Navbar> */}
+
+      <Navbar bg="primary" expand="sm">
+        <Container>
+          <Navbar.Brand className="me-auto">{t('overview_navbar_brand')}</Navbar.Brand>
+          <Navbar.Toggle aria-controls="tenancy-navbar">
+            <SearchIcon />
+          </Navbar.Toggle>
+
+          <Navbar.Collapse id="tenancy-navbar" className="justify-content-end">
+            <Search tenancies={tenancies} />
+          </Navbar.Collapse>
+        </Container>
       </Navbar>
+
       {loading && <MySpinner title="...fetching tenancies..." />}
       {!loading && tenancies && tenancies.length === 0 && (
         <Container>
