@@ -18,8 +18,8 @@ import MySpinner from '../MySpinner'
 import { AuthContext } from 'contexts/AuthContext'
 
 const AddTenancy = lazy(() => import('./AddTenancy'))
-const Tenancy = lazy(() => import('./Tenancy'))
-const Tenancies = lazy(() => import('./Tenancies'))
+const TenancyItem = lazy(() => import('./TenancyItem'))
+const TenancyList = lazy(() => import('./TenancyList'))
 
 const FabButton = styled(Button)`
   width: 50px;
@@ -90,8 +90,8 @@ const Portfolio = () => {
       {!loading && tenancies && tenancies.length > 0 && (
         <Suspense fallback={<MySpinner title="...loading page..." />}>
           <Routes>
-            <Route path="tenancy/:id" element={<Tenancy />} />
-            <Route path="*" element={<Tenancies />} />
+            <Route path="tenancy/:id" element={<TenancyItem />} />
+            <Route path="*" element={<TenancyList tenancies={tenancies} />} />
           </Routes>
         </Suspense>
       )}
