@@ -15,10 +15,6 @@ import { PlusLg } from 'react-bootstrap-icons'
 import MySpinner from '../MySpinner'
 const AddTenancy = lazy(() => import('./AddTenancy'))
 
-// const AddTenancy = lazy(() => import('./AddTenancy'))
-// const Tenancy = lazy(() => import('./Tenancy'))
-// const Tenancies = lazy(() => import('./Tenancies'))
-
 const FabButton = styled(Button)`
   width: 50px;
   height: 50px;
@@ -34,13 +30,10 @@ const Tenancies = () => {
   const items_per_page = parseInt(process.env.REACT_APP_NUMBER_OF_ITEMS_IN_TENANCY_LIST || '10')
   const [items, setItems] = useState<Tenancy[]>()
   const [page_count, setPageCount] = useState(1)
-  const [current_page_index, setCurrentPageIndex] = useState(1)
+  const [current_page_index, setCurrentPageIndex] = useState(() => {
+    return parseInt(sessionStorage.getItem('tenancy_page_index') || '1')
+  })
   const [show_add_modal, setShowAddModal] = useState(false)
-
-  useEffect(() => {
-    const stored_index = parseInt(sessionStorage.getItem('tenancy_page_index') || '1')
-    setCurrentPageIndex(stored_index)
-  }, [])
 
   useEffect(() => {
     const start = (current_page_index - 1) * items_per_page
