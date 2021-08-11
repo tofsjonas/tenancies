@@ -27,6 +27,9 @@
   "edit_tenancy_delete_button": "Delete Tenancy",
   "edit_tenancy_delete_button_is_deleting": "deleting...",
 
+  "navbar-logout": "Log out",
+  "navbar-header": "Tenancy stuff",
+
   "tenancy_was_deleted_confirmation": "Your tenancy was deleted!",
   "tenancy_item_breadcrumb_back_to_list": "My Tenancies"
 }

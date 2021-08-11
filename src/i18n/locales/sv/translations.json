@@ -26,6 +26,9 @@
   "edit_tenancy_delete_button_is_deleting": "tar bort...",
   "edit_tenancy_saved_confirmation": "Dina ändringar har sparats!",
 
+  "navbar-logout": "Logga ut",
+  "navbar-header": "Fastighetsmojs",
+
   "tenancy_was_deleted_confirmation": "Din fastighet är borttagen!",
   "tenancy_item_breadcrumb_back_to_list": "Mina fastigheter"
 }
