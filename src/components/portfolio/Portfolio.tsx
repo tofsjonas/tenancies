@@ -1,13 +1,11 @@
 import React, { useState, useEffect, lazy, Suspense, useRef, useContext } from 'react'
-import styled from '@emotion/styled'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Navbar from 'react-bootstrap/Navbar'
 
-import Button from 'react-bootstrap/Button'
-import { PlusLg, Search as SearchIcon } from 'react-bootstrap-icons'
+import { Search as SearchIcon } from 'react-bootstrap-icons'
 import { useAlert } from 'react-bootstrap-hooks-alert'
 
 import { useTranslation } from 'react-i18next'
@@ -18,18 +16,8 @@ import Search from './Search'
 import MySpinner from '../MySpinner'
 import { AuthContext } from 'contexts/AuthContext'
 
-const AddTenancy = lazy(() => import('./AddTenancy'))
 const Tenancy = lazy(() => import('./Tenancy'))
 const Tenancies = lazy(() => import('./Tenancies'))
-
-const FabButton = styled(Button)`
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-`
 
 const Portfolio = () => {
   const { user } = useContext(AuthContext)
@@ -37,7 +25,6 @@ const Portfolio = () => {
   const { t } = useTranslation()
   const { tenancies, dispatch } = useContext(TenancyContext)
   const [loading, setLoading] = useState(true)
-  const [show_add_modal, setShowAddModal] = useState(false)
 
   const { warning } = useAlert()
 
@@ -66,25 +53,12 @@ const Portfolio = () => {
     }
   }, [dispatch, warning, user])
 
-  const handleCloseAddModal = () => {
-    setShowAddModal(false)
-  }
-
-  const handleAddClick = () => {
-    setShowAddModal(true)
-  }
-
   return (
     <>
-      {/* <Navbar bg="primary" expand="lg">
-        <Navbar.Brand className="mr-auto">{t('overview_navbar_brand')}</Navbar.Brand>
-        <Search tenancies={tenancies} />
-      </Navbar> */}
-
       <Navbar bg="primary" expand="sm">
         <Container>
           <Navbar.Brand className="me-auto">{t('overview_navbar_brand')}</Navbar.Brand>
-          <Navbar.Toggle aria-controls="tenancy-navbar">
+          <Navbar.Toggle aria-controls="tenancy-navbar" style={{ color: 'silver', borderColor: 'silver' }}>
             <SearchIcon />
           </Navbar.Toggle>
 
@@ -110,12 +84,6 @@ const Portfolio = () => {
           </Routes>
         </Suspense>
       )}
-      <FabButton onClick={handleAddClick}>
-        <PlusLg />
-      </FabButton>
-      <Suspense fallback={<MySpinner title="...loading modal..." />}>
-        {show_add_modal && <AddTenancy hideModal={handleCloseAddModal} />}
-      </Suspense>
     </>
   )
 }

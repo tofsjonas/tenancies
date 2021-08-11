@@ -6,8 +6,10 @@ import { signOut } from 'lib/auth'
 
 import LanguageToggler from './LanguageToggler'
 import { AuthContext } from '../contexts/AuthContext'
+import { useTranslation } from 'react-i18next'
 
 const MyNavbar = () => {
+  const { t } = useTranslation()
   const { user } = useContext(AuthContext)
   const { success } = useAlert()
 
@@ -22,7 +24,7 @@ const MyNavbar = () => {
 
   return (
     <Navbar expand="sm" className="container">
-      <Navbar.Brand className="mr-auto">Tenancy Stuff</Navbar.Brand>
+      <Navbar.Brand className="mr-auto">{t('navbar-header')}</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
         {user && user.uid && (
@@ -38,7 +40,7 @@ const MyNavbar = () => {
                 </NavDropdown.Item>
               )} */}
               <NavDropdown.Item href="#" onClick={handleLogout}>
-                Logout
+                {t('navbar-logout')}
               </NavDropdown.Item>
             </NavDropdown>
           </>
