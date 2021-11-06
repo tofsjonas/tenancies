@@ -1,5 +1,5 @@
 import MySpinner from 'components/MySpinner'
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, useEffect } from 'react'
 import { firebaseApp } from '../lib/firebase/firebase.config'
 
 export const SET_USER = 'SET_USER'
@@ -53,16 +53,14 @@ export const AuthContext = createContext<ContextType>({
   dispatch: () => null,
 })
 
+type func = () => void
+
 const AuthProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  React.useEffect(() => {
-    // console.log(dispatch)
-    // dispatch({
-    //   type: SET_IS_LOADING,
-    //   payload: true,
-    // })
+  const unregisterAuthObserver = React.useRef<func>(() => {})
 
-    firebaseApp.auth().onAuthStateChanged((firebase_user) => {
+  useEffect(() => {
+    unregisterAuthObserver.current = firebaseApp.auth().onAuthStateChanged((firebase_user) => {
       if (firebase_user) {
         const user = {
           uid: firebase_user.uid,
@@ -84,6 +82,9 @@ const AuthProvider: React.FC = ({ children }) => {
         })
       }
     })
+    return () => {
+      unregisterAuthObserver.current()
+    }
   }, [dispatch])
 
   return (
