@@ -89,8 +89,8 @@ const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
-      {state.is_loading && <MySpinner title="...authenticating..." />}
-      {!state.is_loading && children}
+      {state.is_loading ? <MySpinner title="...authenticating..." /> : children}
+      {/* {!state.is_loading && children} */}
     </AuthContext.Provider>
   )
 }
